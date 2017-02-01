@@ -3,4 +3,4 @@
 from hockepy import nhl
 
 if __name__ == '__main__':
-    nhl.today()
+    nhl.print_today_games()
