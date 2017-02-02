@@ -29,6 +29,5 @@ def print_today_games():
     else:
         max_name_len = max([len(game.away) for game in games])
         for game in games:
-                print('{away:>{width}} @ {home}'.format(
-                    away=game.away, home=game.home, width=max_name_len))
-
+            print('{away:>{width}} @ {home}'.format(
+                away=game.away, home=game.home, width=max_name_len))
