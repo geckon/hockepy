@@ -44,13 +44,13 @@ class Schedule(BaseCommand):
         """Register and return the sub-command's parser."""
         parser = subparsers.add_parser('schedule')
         parser.add_argument('date', help='date to get schedule for',
-                            default=None)
+                            default=None, nargs='?')
         return parser
 
     def run(self, args):
         """Run the command with the given arguments."""
         if args.date is None:
-            date = datetime.time.strftime(datetime.date.today(), self.DATE_FMT)
+            date = datetime.date.today().strftime(self.DATE_FMT)
         else:
             date = args.date
 
