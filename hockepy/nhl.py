@@ -31,3 +31,22 @@ def print_today_games():
         for game in games:
             print('{away:>{width}} @ {home}'.format(
                 away=game.away, home=game.home, width=max_name_len))
+
+def get_schedule(date):
+    """Return games played on the given date.
+
+    Date must be in YYYY-MM-DD format. Return games as a list of Game
+    named tuples.
+    """
+    url = '{schedule_url}?startDate={date}&endDate={date}'.format(
+        schedule_url=SCHEDULE_URL, date=date)
+    schedule = requests.get(url).json()
+    if schedule['totalGames'] == 0:
+        return []
+
+    games = []
+    for game in schedule['dates'][0]['games']:
+        games.append(Game(
+            home=game['teams']['home']['team']['name'],
+            away=game['teams']['away']['team']['name']))
+    return games
