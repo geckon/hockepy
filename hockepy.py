@@ -10,19 +10,17 @@
 import argparse
 import sys
 
-from hockepy import nhl
 from hockepy import commands
 from hockepy.commands import BaseCommand
 
 if __name__ == '__main__':
-    # default action
-    if len(sys.argv) == 1 or sys.argv[1] == 'today':
-        nhl.print_today_games()
-        sys.exit(0)
 
-    # other actions
+    if len(sys.argv) == 1:
+        print("Command missing. Run `{} -h' for help.".format(sys.argv[0]))
+        sys.exit(1)
+
     parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers(dest='subparser_name')
+    subparsers = parser.add_subparsers(dest='command_name')
 
     CMDS = [cmd() for cmd in BaseCommand.__subclasses__()]
     for cmd in CMDS:
@@ -30,11 +28,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args(sys.argv[1:])
     for cmd in CMDS:
-        if args.subparser_name  == cmd.command:
+        if args.command_name == cmd.command:
             cmd.run(args)
             sys.exit(0)
-
-    # unknown command
-    print('Unknown command {}'.format(sys.argv[1]))
-    sys.exit(1)
-

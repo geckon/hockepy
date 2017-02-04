@@ -42,7 +42,7 @@ class Schedule(BaseCommand):
 
     def register_parser(self, subparsers):
         """Register and return the sub-command's parser."""
-        parser = subparsers.add_parser('schedule')
+        parser = subparsers.add_parser(self.command)
         parser.add_argument('date', help='date to get schedule for',
                             default=None, nargs='?')
         return parser
