@@ -12,32 +12,18 @@ import logging
 import sys
 
 from hockepy.commands import get_commands
-
-
-def init_log(debug):
-    """Initialize log.
-
-    If debug argument is true, set default level to DEBUG.
-    """
-    logger = logging.getLogger()
-    if debug:
-        logger.setLevel(logging.DEBUG)
-
-    # there should be a default handler but make sure
-    if not logger.handlers:
-        logger.addHandler(logging.StreamHandler())
-
-    # set formatting for all handlers
-    formatter = logging.Formatter(fmt='%(levelname)s: %(module)s: %(message)s')
-    for handler in logger.handlers:
-        handler.setFormatter(formatter)
+from hockepy.log import init_log
 
 
 def run_hockepy():
     """Process arguments and run the specified sub(command)."""
     parser = argparse.ArgumentParser()
-    parser.add_argument('-D', '--debug', action='store_true',
+    parser.add_argument('-D', '--debug', action='store_const', dest='loglevel',
+                        const=logging.DEBUG, default=logging.WARNING,
                         help='turn debug output on')
+    parser.add_argument('-v', '--verbose', action='store_const',
+                        dest='loglevel', const=logging.INFO,
+                        help='turn verbose output on')
     subparsers = parser.add_subparsers(dest='command_name')
 
     cmds = get_commands()
@@ -49,7 +35,7 @@ def run_hockepy():
         print("Command missing. Run `{} -h' for help.".format(sys.argv[0]))
         sys.exit(1)
 
-    init_log(debug=args.debug)
+    init_log(level=args.loglevel)
     logging.debug('Discovered commands: %s', cmds.keys())
 
     command = cmds[args.command_name]

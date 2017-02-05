@@ -24,7 +24,7 @@ def get_schedule(date):
     Date must be in YYYY-MM-DD format. Return games as a list of Game
     named tuples.
     """
-    logging.debug('Retrieving NHL schedule for %s.', date)
+    logging.info('Retrieving NHL schedule for %s.', date)
     url = '{schedule_url}?startDate={date}&endDate={date}'.format(
         schedule_url=SCHEDULE_URL, date=date)
     schedule = requests.get(url).json()
