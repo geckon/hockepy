@@ -10,8 +10,7 @@
 import argparse
 import sys
 
-from hockepy import commands
-from hockepy.commands import BaseCommand
+from hockepy.commands import get_commands
 
 if __name__ == '__main__':
 
@@ -22,12 +21,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='command_name')
 
-    CMDS = [cmd() for cmd in BaseCommand.__subclasses__()]
-    for cmd in CMDS:
-        cmd.register_parser(subparsers)
+    cmds = get_commands()
+    for cmd, cmd_instance in cmds.items():
+        cmd_instance.register_parser(subparsers)
 
     args = parser.parse_args(sys.argv[1:])
-    for cmd in CMDS:
-        if args.command_name == cmd.command:
-            cmd.run(args)
-            sys.exit(0)
+    command = cmds[args.command_name]
+    command.run(args)
+    sys.exit(0)

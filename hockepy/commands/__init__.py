@@ -6,6 +6,31 @@
 # |____||____| `.____.'  `._____.'|____||____||_________||_____|     |______|
 #
 
+"""
+hockeypy.commands
+-----------------
+
+This module provides definition of hockepy (sub)commands as well as
+a function to retrieve all available (sub)commands.
+"""
+
 from .base_command import BaseCommand
 from .schedule import Schedule
 from .today import Today
+
+_CMDS_CACHE = None
+
+def get_commands():
+    """Return all available commands.
+
+    More specifically, return a dictionary where keys are commands'
+    names and values are their instances. Cache the dictionary for
+    repeated use.
+    """
+    global _CMDS_CACHE
+    if _CMDS_CACHE is not None:
+        return _CMDS_CACHE
+
+    commands = [cmd() for cmd in BaseCommand.__subclasses__()]
+    _CMDS_CACHE = {cmd.command: cmd for cmd in commands}
+    return _CMDS_CACHE
