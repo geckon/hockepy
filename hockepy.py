@@ -31,8 +31,8 @@ def init_log(debug):
     for handler in logger.handlers:
         handler.setFormatter(formatter)
 
-if __name__ == '__main__':
-
+def run_hockepy():
+    """Process arguments and run the specified sub(command)."""
     if len(sys.argv) == 1:
         print("Command missing. Run `{} -h' for help.".format(sys.argv[0]))
         sys.exit(1)
@@ -43,12 +43,16 @@ if __name__ == '__main__':
     subparsers = parser.add_subparsers(dest='command_name')
 
     cmds = get_commands()
-    for cmd, cmd_instance in cmds.items():
+    for _, cmd_instance in cmds.items():
         cmd_instance.register_parser(subparsers)
 
     args = parser.parse_args(sys.argv[1:])
     init_log(debug=args.debug)
-    logging.debug('Discovered commands: {}'.format(cmds.keys()))
+    logging.debug('Discovered commands: %s', cmds.keys())
     command = cmds[args.command_name]
     command.run(args)
     sys.exit(0)
+
+
+if __name__ == '__main__':
+    run_hockepy()
