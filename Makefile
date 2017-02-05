@@ -16,4 +16,4 @@ pylint:
 	pylint --reports=n hockepy tests
 
 test:
-	python -m unittest discover tests
+	python -m unittest discover -v tests
