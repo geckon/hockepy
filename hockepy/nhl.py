@@ -6,6 +6,7 @@
 # |____||____| `.____.'  `._____.'|____||____||_________||_____|     |______|
 #
 
+import logging
 from collections import namedtuple
 from urllib.parse import urljoin
 
@@ -22,10 +23,12 @@ def get_schedule(date):
     Date must be in YYYY-MM-DD format. Return games as a list of Game
     named tuples.
     """
+    logging.debug('Retrieving NHL schedule for %s.', date)
     url = '{schedule_url}?startDate={date}&endDate={date}'.format(
         schedule_url=SCHEDULE_URL, date=date)
     schedule = requests.get(url).json()
     if schedule['totalGames'] == 0:
+        logging.debug('No games for the period of time.')
         return []
 
     games = []

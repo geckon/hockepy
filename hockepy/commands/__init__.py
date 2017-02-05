@@ -14,6 +14,8 @@ This module provides definition of hockepy (sub)commands as well as
 a function to retrieve all available (sub)commands.
 """
 
+import logging
+
 from .base_command import BaseCommand
 from .schedule import Schedule
 from .today import Today

@@ -8,9 +8,28 @@
 #
 
 import argparse
+import logging
 import sys
 
 from hockepy.commands import get_commands
+
+def init_log(debug):
+    """Initialize log.
+
+    If debug argument is true, set default level to DEBUG.
+    """
+    logger = logging.getLogger()
+    if debug:
+        logger.setLevel(logging.DEBUG)
+
+    # there should be a default handler but make sure
+    if not logger.handlers:
+        logger.addHandler(logging.StreamHandler())
+
+    # set formatting for all handlers
+    formatter = logging.Formatter(fmt='%(levelname)s: %(module)s: %(message)s')
+    for handler in logger.handlers:
+        handler.setFormatter(formatter)
 
 if __name__ == '__main__':
 
@@ -19,6 +38,8 @@ if __name__ == '__main__':
         sys.exit(1)
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('-D', '--debug', action='store_true',
+                        help='turn debug output on')
     subparsers = parser.add_subparsers(dest='command_name')
 
     cmds = get_commands()
@@ -26,6 +47,8 @@ if __name__ == '__main__':
         cmd_instance.register_parser(subparsers)
 
     args = parser.parse_args(sys.argv[1:])
+    init_log(debug=args.debug)
+    logging.debug('Discovered commands: {}'.format(cmds.keys()))
     command = cmds[args.command_name]
     command.run(args)
     sys.exit(0)

@@ -17,6 +17,7 @@ games scheduled for the given date (default is today).
 """
 
 import datetime
+import logging
 
 from hockepy import nhl
 from hockepy.commands import BaseCommand
@@ -49,8 +50,10 @@ class Schedule(BaseCommand):
 
     def run(self, args):
         """Run the command with the given arguments."""
+        logging.debug('Running the %r command.', self.command)
         if args.date is None:
             date = datetime.date.today().strftime(self.DATE_FMT)
+            logging.debug('Date empty -> using today (%s).', date)
         else:
             date = args.date
 

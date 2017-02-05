@@ -16,6 +16,8 @@ This command is very similar to 'schedule' command and it's purpose is
 to retrieve and print information about games scheduled for today.
 """
 
+import logging
+
 from hockepy.commands import BaseCommand, Schedule
 
 class Today(BaseCommand):
@@ -41,5 +43,6 @@ class Today(BaseCommand):
 
     def run(self, args):
         """Run the command with the given arguments."""
+        logging.debug('Running the %r command.', self.command)
         args.date = None
         Schedule().run(args)
