@@ -20,6 +20,7 @@ import logging
 
 from hockepy.commands import BaseCommand, Schedule
 
+
 class Today(BaseCommand):
     """Today command.
 

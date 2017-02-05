@@ -22,6 +22,7 @@ from .today import Today
 
 _CMDS_CACHE = None
 
+
 def get_commands():
     """Return all available commands.
 

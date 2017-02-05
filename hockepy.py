@@ -13,6 +13,7 @@ import sys
 
 from hockepy.commands import get_commands
 
+
 def init_log(debug):
     """Initialize log.
 
@@ -30,6 +31,7 @@ def init_log(debug):
     formatter = logging.Formatter(fmt='%(levelname)s: %(module)s: %(message)s')
     for handler in logger.handlers:
         handler.setFormatter(formatter)
+
 
 def run_hockepy():
     """Process arguments and run the specified sub(command)."""

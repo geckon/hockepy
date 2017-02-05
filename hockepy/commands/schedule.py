@@ -22,6 +22,7 @@ import logging
 from hockepy import nhl
 from hockepy.commands import BaseCommand
 
+
 class Schedule(BaseCommand):
     """Schedule command.
 

@@ -17,6 +17,7 @@ SCHEDULE_URL = urljoin(API_URL, 'schedule')
 
 Game = namedtuple('Game', ['home', 'away'])
 
+
 def get_schedule(date):
     """Return games played on the given date.
 

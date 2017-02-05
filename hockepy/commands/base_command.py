@@ -16,9 +16,11 @@ for all hockepy (sub)commands.
 
 import abc
 
+
 class BaseCommand(metaclass=abc.ABCMeta):
     """Abstract class definining the interface each hockepy (sub)command
-    should implement."""
+    should implement.
+    """
 
     @abc.abstractproperty
     def command(self):

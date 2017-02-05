@@ -15,6 +15,7 @@ import unittest
 
 from hockepy import nhl
 
+
 class TestNhl(unittest.TestCase):
     """Tests for hockepy.nhl module."""
 
