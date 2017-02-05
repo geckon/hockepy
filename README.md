@@ -38,8 +38,8 @@ Subcommands also support `-h` option:
     optional arguments:
       -h, --help  show this help message and exit
 
-Bear in mind that the actual help may differ as this listing may get a bit
-outdated as new features are added.
+Bear in mind that the actual help may differ as this listing won't necessarily
+be updated with any feature addition/change.
 
 ## NHL API
 
