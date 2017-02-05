@@ -33,10 +33,6 @@ def init_log(debug):
 
 def run_hockepy():
     """Process arguments and run the specified sub(command)."""
-    if len(sys.argv) == 1:
-        print("Command missing. Run `{} -h' for help.".format(sys.argv[0]))
-        sys.exit(1)
-
     parser = argparse.ArgumentParser()
     parser.add_argument('-D', '--debug', action='store_true',
                         help='turn debug output on')
@@ -47,8 +43,13 @@ def run_hockepy():
         cmd_instance.register_parser(subparsers)
 
     args = parser.parse_args(sys.argv[1:])
+    if args.command_name is None:
+        print("Command missing. Run `{} -h' for help.".format(sys.argv[0]))
+        sys.exit(1)
+
     init_log(debug=args.debug)
     logging.debug('Discovered commands: %s', cmds.keys())
+
     command = cmds[args.command_name]
     command.run(args)
     sys.exit(0)
