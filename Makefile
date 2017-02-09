@@ -13,7 +13,7 @@ pep8:
 	pep8 --exclude=venv --filename="*.py" .
 
 pylint:
-	pylint --reports=n hockepy tests
+	pylint --reports=n hockepy.py hockepy tests
 
 test:
 	python -m unittest discover -v tests
