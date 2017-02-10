@@ -45,24 +45,32 @@ class Schedule(BaseCommand):
     def register_parser(self, subparsers):
         """Register and return the sub-command's parser."""
         parser = subparsers.add_parser(self.command)
-        parser.add_argument('date', help='date to get schedule for',
-                            default=None, nargs='?')
+        parser.add_argument('first_date', default=None, nargs='?',
+                            help='first date to get schedule for')
+        parser.add_argument('last_date', default=None, nargs='?',
+                            help='last date to get schedule for')
         return parser
 
     def run(self, args):
         """Run the command with the given arguments."""
         logging.debug('Running the %r command.', self.command)
-        if args.date is None:
-            date = datetime.date.today().strftime(self.DATE_FMT)
-            logging.debug('Date empty -> using today (%s).', date)
-        else:
-            date = args.date
+        if args.first_date is None:
+            args.first_date = datetime.date.today().strftime(self.DATE_FMT)
+            logging.debug('Date empty -> using today (%s).', args.first_date)
+        if args.last_date is None:
+            args.last_date = args.first_date
 
-        games = nhl.get_schedule(date)
-        if not games:
-            print('No games for today.')
-        else:
-            max_name_len = max([len(game.away) for game in games])
-            for game in games:
-                print('{away:>{width}} @ {home}'.format(
-                    away=game.away, home=game.home, width=max_name_len))
+        schedule = nhl.get_schedule(args.first_date, args.last_date)
+        if schedule is None:
+            print('No games at all.')
+            return
+        for date, games in schedule.items():
+            print('Schedule for {}'.format(date))
+            if not games:
+                print('  No games for {}.'.format(date))
+            else:
+                max_name_len = max([len(game.away) for game in games])
+                for game in games:
+                    print('  {away:>{width}} @ {home}'.format(
+                        away=game.away, home=game.home, width=max_name_len))
+            print('')

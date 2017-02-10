@@ -20,19 +20,24 @@ class TestNhl(unittest.TestCase):
     """Tests for hockepy.nhl module."""
 
     KNOWN_SCHEDULE = {
-        '2014-01-01': [
+        '2014-01-01': {'2014-01-01': [
             nhl.Game(home='Detroit Red Wings', away='Toronto Maple Leafs'),
             nhl.Game(home='Vancouver Canucks', away='Tampa Bay Lightning')
-            ],
-        '2016-06-01': [
+            ]},
+        '2016-06-01': {'2016-06-01': [
             nhl.Game(home='Pittsburgh Penguins', away='San Jose Sharks')
-            ],
-        '2016-07-01': [],
-        '2017-02-05': [
+            ]},
+        '2016-07-01': None,
+        '2017-02-05': {'2017-02-05': [
             nhl.Game(home='New York Rangers', away='Calgary Flames'),
             nhl.Game(home='Montréal Canadiens', away='Edmonton Oilers'),
             nhl.Game(home='Washington Capitals', away='Los Angeles Kings')
-            ]
+            ]}
+        }
+
+    NO_SCHEDULE_PERIODS = {
+        ('2016-07-01', '2016-07-01'),
+        ('2016-07-01', '2016-07-31')
         }
 
     def test01_get_schedule_known_dates(self):
@@ -41,8 +46,22 @@ class TestNhl(unittest.TestCase):
         Use dates for which the schedule is known and compare the result
         with expected data.
         """
-        for day, games in self.KNOWN_SCHEDULE.items():
-            schedule = nhl.get_schedule(day)
-            self.assertEqual(len(games), len(schedule))
-            for game in schedule:
-                self.assertIn(game, games)
+        for day, day_schedule in self.KNOWN_SCHEDULE.items():
+            schedule = nhl.get_schedule(day, day)
+            if day_schedule is None:
+                self.assertEqual(schedule, None)
+            else:
+                self.assertEqual(len(day_schedule), len(schedule))
+                self.assertEqual(len(day_schedule[day]), len(schedule[day]))
+                for game in schedule[day]:
+                    self.assertIn(game, day_schedule[day])
+
+    def test02_get_schedule_empty(self):
+        """Test that get_schedule() behaves correctly for no games days.
+
+        Use dates that are known for no games played (like off-season)
+        and check that get_schedule() returns None as it should.
+        """
+        for period in self.NO_SCHEDULE_PERIODS:
+            schedule = nhl.get_schedule(*period)
+            self.assertEqual(schedule, None)
