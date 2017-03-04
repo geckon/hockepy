@@ -18,10 +18,10 @@ This module contains logging-related code:
 import logging
 
 
-def init_log(level):
+def init_log(level=logging.WARNING):
     """Initialize log.
 
-    If debug argument is true, set default level to DEBUG.
+    WARNING is the default log level but it can be overridden.
     """
     logger = logging.getLogger()
     logger.setLevel(level)

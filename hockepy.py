@@ -15,29 +15,45 @@ from hockepy.commands import get_commands
 from hockepy.log import init_log
 
 
+def process_args(parser):
+    """Parse, process and return arguments.
+
+    Also initialize logger. Exit, if there is an error (e.g. no command
+    provided).
+    """
+    args = parser.parse_args(sys.argv[1:])
+    if args.command_name is None:
+        print("Command missing. Run `{} -h' for help.".format(sys.argv[0]))
+        sys.exit(1)
+
+    if args.debug:
+        loglevel = logging.DEBUG
+    elif args.verbose:
+        loglevel = logging.INFO
+    else:
+        loglevel = logging.WARNING
+    init_log(level=loglevel)
+    logging.debug('Logging level set to %s', loglevel)
+
+    return args
+
+
 def run_hockepy():
     """Process arguments and run the specified sub(command)."""
     parser = argparse.ArgumentParser()
-    parser.add_argument('-D', '--debug', action='store_const', dest='loglevel',
-                        const=logging.DEBUG, default=logging.WARNING,
+    parser.add_argument('-D', '--debug', action='store_true', dest='debug',
                         help='turn debug output on')
-    parser.add_argument('-v', '--verbose', action='store_const',
-                        dest='loglevel', const=logging.INFO,
-                        help='turn verbose output on')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        dest='verbose', help='turn verbose output on')
     subparsers = parser.add_subparsers(dest='command_name')
 
     cmds = get_commands()
     for _, cmd_instance in cmds.items():
         cmd_instance.register_parser(subparsers)
 
-    args = parser.parse_args(sys.argv[1:])
-    if args.command_name is None:
-        print("Command missing. Run `{} -h' for help.".format(sys.argv[0]))
-        sys.exit(1)
+    args = process_args(parser)
 
-    init_log(level=args.loglevel)
     logging.debug('Discovered commands: %s', cmds.keys())
-
     command = cmds[args.command_name]
     command.run(args)
     sys.exit(0)
