@@ -7,7 +7,7 @@
 #
 
 """
-hockeypy.commands.today
+hockepy.commands.today
 -----------------------
 
 This module defines class for today command.

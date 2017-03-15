@@ -7,6 +7,15 @@
 # |____||____| `.____.'  `._____.'|____||____||_________||_____|     |______|
 #
 
+"""
+hockepy.py
+-----------
+
+hockepy.py CLI utility implementation.
+
+Run with -h for help.
+"""
+
 import argparse
 import logging
 import sys

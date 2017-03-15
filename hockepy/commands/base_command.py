@@ -7,7 +7,7 @@
 #
 
 """
-hockeypy.commands.base_command
+hockepy.commands.base_command
 ------------------------------
 
 This module contains abstract class BaseCommand that specifies interface

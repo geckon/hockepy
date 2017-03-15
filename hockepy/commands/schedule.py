@@ -7,7 +7,7 @@
 #
 
 """
-hockeypy.commands.schedule
+hockepy.commands.schedule
 ------------------------------
 
 This module defines class for schedule command.

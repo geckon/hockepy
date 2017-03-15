@@ -7,7 +7,7 @@
 #
 
 """
-hockeypy.commands
+hockepy.commands
 -----------------
 
 This module provides definition of hockepy (sub)commands as well as

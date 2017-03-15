@@ -7,7 +7,7 @@
 #
 
 """
-hockeypy.log
+hockepy.log
 ------------
 
 This module contains logging-related code:
