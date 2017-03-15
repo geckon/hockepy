@@ -40,6 +40,9 @@ class Today(BaseCommand):
     def register_parser(self, subparsers):
         """Register and return the sub-command's parser."""
         parser = subparsers.add_parser(self.command)
+        parser.add_argument('--home-first', dest='home_first',
+                            action='store_true',
+                            help='print the home team first')
         return parser
 
     def run(self, args):

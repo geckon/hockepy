@@ -49,6 +49,9 @@ class Schedule(BaseCommand):
                             help='first date to get schedule for')
         parser.add_argument('last_date', default=None, nargs='?',
                             help='last date to get schedule for')
+        parser.add_argument('--home-first', dest='home_first',
+                            action='store_true',
+                            help='print the home team first')
         return parser
 
     def run(self, args):
@@ -69,8 +72,13 @@ class Schedule(BaseCommand):
             if not games:
                 print('  No games for {}.'.format(date))
             else:
-                max_name_len = max([len(game.away) for game in games])
+                if args.home_first:
+                    game_fmt = '  {home:>{width}} : {away}'
+                    max_first_len = max([len(game.home) for game in games])
+                else:
+                    game_fmt = '  {away:>{width}} @ {home}'
+                    max_first_len = max([len(game.away) for game in games])
                 for game in games:
-                    print('  {away:>{width}} @ {home}'.format(
-                        away=game.away, home=game.home, width=max_name_len))
+                    print(game_fmt.format(
+                        away=game.away, home=game.home, width=max_first_len))
             print('')
