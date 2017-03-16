@@ -54,6 +54,23 @@ class Schedule(BaseCommand):
                             help='print the home team first')
         return parser
 
+    def print_game(self, game, team_width):
+        """Print the given game.
+
+        Respect 'home_first' argument and use the appropriate delimiter.
+        Also print each team name so it's padded to at least
+        'team_width' characters. Print each game on one line.
+        """
+        if self.args.home_first:
+            teams_fmt = '{home:>{width}} : {away:<{width}}'
+        else:
+            teams_fmt = '{away:>{width}} @ {home:<{width}}'
+        teams = teams_fmt.format(
+            away=game.away, home=game.home, width=team_width)
+        time = '{h:02d}:{m:02d} UTC'.format(
+            h=game.time.tm_hour, m=game.time.tm_min)
+        print(teams + time)
+
     def run(self, args):
         """Run the command with the given arguments."""
         logging.debug('Running the %r command.', self.command)
@@ -62,6 +79,7 @@ class Schedule(BaseCommand):
             logging.debug('Date empty -> using today (%s).', args.first_date)
         if args.last_date is None:
             args.last_date = args.first_date
+        self.args = args
 
         schedule = nhl.get_schedule(args.first_date, args.last_date)
         if schedule is None:
@@ -72,13 +90,8 @@ class Schedule(BaseCommand):
             if not games:
                 print('  No games for {}.'.format(date))
             else:
-                if args.home_first:
-                    game_fmt = '  {home:>{width}} : {away}'
-                    max_first_len = max([len(game.home) for game in games])
-                else:
-                    game_fmt = '  {away:>{width}} @ {home}'
-                    max_first_len = max([len(game.away) for game in games])
+                # + 1 is an additional padding
+                team_width = max([len(game.home) for game in games]) + 1
                 for game in games:
-                    print(game_fmt.format(
-                        away=game.away, home=game.home, width=max_first_len))
+                    self.print_game(game, team_width)
             print('')

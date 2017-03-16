@@ -18,14 +18,24 @@ These functions are implemented:
 
 import logging
 from collections import namedtuple, OrderedDict
+from time import strptime
 from urllib.parse import urljoin
 
 import requests
 
+# URL to the NHL API
 API_URL = 'https://statsapi.web.nhl.com/api/v1/'
+
+# schedule API point
 SCHEDULE_URL = urljoin(API_URL, 'schedule')
 
-Game = namedtuple('Game', ['home', 'away'])
+# Date/time used by the API
+DATETIME_FMT = '%Y-%m-%dT%H:%M:%SZ'
+
+Game = namedtuple('Game',
+                  ['home',  # home team
+                   'away',  # away team
+                   'time']) # UTC time and date (time.struct_time format)
 
 
 def get_schedule(start_date, end_date):
@@ -47,8 +57,16 @@ def get_schedule(start_date, end_date):
     for day in schedule['dates']:
         games = []
         for game in day['games']:
+            # try and parse time
+            try:
+                gametime = strptime(game['gameDate'], DATETIME_FMT)
+            except ValueError as err:
+                logging.debug('Unable to parse time: %s', err)
+                gametime = None
+
             games.append(Game(
                 home=game['teams']['home']['team']['name'],
-                away=game['teams']['away']['team']['name']))
+                away=game['teams']['away']['team']['name'],
+                time=gametime))
         sched[day['date']] = games
     return sched
