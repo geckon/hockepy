@@ -12,6 +12,7 @@ hockepy.nhl module tests
 """
 
 import unittest
+from time import strptime
 
 from hockepy import nhl
 
@@ -19,19 +20,33 @@ from hockepy import nhl
 class TestNhl(unittest.TestCase):
     """Tests for hockepy.nhl module."""
 
+    TIME_FMT = '%Y-%m-%dT%H:%M:%SZ'
+
     KNOWN_SCHEDULE = {
         '2014-01-01': {'2014-01-01': [
-            nhl.Game(home='Detroit Red Wings', away='Toronto Maple Leafs'),
-            nhl.Game(home='Vancouver Canucks', away='Tampa Bay Lightning')
+            nhl.Game(home='Detroit Red Wings',
+                     away='Toronto Maple Leafs',
+                     time=strptime('2014-01-01T18:00:00Z', TIME_FMT)),
+            nhl.Game(home='Vancouver Canucks',
+                     away='Tampa Bay Lightning',
+                     time=strptime('2014-01-02T03:00:00Z', TIME_FMT)),
             ]},
         '2016-06-01': {'2016-06-01': [
-            nhl.Game(home='Pittsburgh Penguins', away='San Jose Sharks')
+            nhl.Game(home='Pittsburgh Penguins',
+                     away='San Jose Sharks',
+                     time=strptime('2016-06-02T00:00:00Z', TIME_FMT)),
             ]},
         '2016-07-01': None,
         '2017-02-05': {'2017-02-05': [
-            nhl.Game(home='New York Rangers', away='Calgary Flames'),
-            nhl.Game(home='Montréal Canadiens', away='Edmonton Oilers'),
-            nhl.Game(home='Washington Capitals', away='Los Angeles Kings')
+            nhl.Game(home='New York Rangers',
+                     away='Calgary Flames',
+                     time=strptime('2017-02-05T19:00:00Z', TIME_FMT)),
+            nhl.Game(home='Montréal Canadiens',
+                     away='Edmonton Oilers',
+                     time=strptime('2017-02-05T18:00:00Z', TIME_FMT)),
+            nhl.Game(home='Washington Capitals',
+                     away='Los Angeles Kings',
+                     time=strptime('2017-02-05T17:00:00Z', TIME_FMT)),
             ]}
         }
 
