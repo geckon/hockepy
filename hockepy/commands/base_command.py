@@ -22,6 +22,13 @@ class BaseCommand(metaclass=abc.ABCMeta):
     should implement.
     """
 
+    def __init__(self):
+        """Initialize the command.
+
+        self.args will be set by run() method if needed - None for now.
+        """
+        self.args = None
+
     @abc.abstractproperty
     def command(self):
         """Return the command name as expected on the command line."""
