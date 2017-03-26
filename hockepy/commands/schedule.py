@@ -72,7 +72,8 @@ class Schedule(BaseCommand):
         """Run the command."""
         logging.debug('Running the %r command.', self.command)
         if self.args.first_date is None:
-            self.args.first_date = datetime.date.today().strftime(self.DATE_FMT)
+            self.args.first_date = datetime.date.today().strftime(
+                self.DATE_FMT)
             logging.debug('Date empty -> using today (%s).',
                           self.args.first_date)
         if self.args.last_date is None:

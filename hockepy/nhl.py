@@ -33,9 +33,9 @@ SCHEDULE_URL = urljoin(API_URL, 'schedule')
 DATETIME_FMT = '%Y-%m-%dT%H:%M:%SZ'
 
 Game = namedtuple('Game',
-                  ['home',  # home team
-                   'away',  # away team
-                   'time']) # UTC time and date (time.struct_time format)
+                  ['home',   # home team
+                   'away',   # away team
+                   'time'])  # UTC time and date (time.struct_time format)
 
 
 def get_schedule(start_date, end_date):
