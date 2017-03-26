@@ -30,21 +30,18 @@ class Schedule(BaseCommand):
     - date (positional)
     """
 
+    _COMMAND = 'schedule'
     DATE_FMT = '%Y-%m-%d'
-
-    @property
-    def command(self):
-        """Return the command name as expected on the command line."""
-        return 'schedule'
 
     @property
     def description(self):
         """Return the command's short description for user."""
         return 'Print schedule for the requested date.'
 
-    def register_parser(self, subparsers):
+    @classmethod
+    def register_parser(cls, subparsers):
         """Register and return the sub-command's parser."""
-        parser = subparsers.add_parser(self.command)
+        parser = subparsers.add_parser(cls.command)
         parser.add_argument('first_date', default=None, nargs='?',
                             help='first date to get schedule for')
         parser.add_argument('last_date', default=None, nargs='?',

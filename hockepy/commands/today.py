@@ -27,19 +27,17 @@ class Today(BaseCommand):
     Accepts the following arguments:
     """
 
-    @property
-    def command(self):
-        """Return the command name as expected on the command line."""
-        return 'today'
+    _COMMAND = 'today'
 
     @property
     def description(self):
         """Return the command's short description for user."""
         return 'Print schedule for today.'
 
-    def register_parser(self, subparsers):
+    @classmethod
+    def register_parser(cls, subparsers):
         """Register and return the sub-command's parser."""
-        parser = subparsers.add_parser(self.command)
+        parser = subparsers.add_parser(cls.command)
         parser.add_argument('--home-first', dest='home_first',
                             action='store_true',
                             help='print the home team first')

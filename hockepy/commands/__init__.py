@@ -25,13 +25,13 @@ def get_commands():
     """Return all available commands.
 
     More specifically, return a dictionary where keys are commands'
-    names and values are their instances. Cache the dictionary for
-    repeated use.
+    names and values are the classes themselves. Cache the dictionary
+    for repeated use.
     """
     global _CMDS_CACHE
     if _CMDS_CACHE is not None:
         return _CMDS_CACHE
 
-    commands = [cmd() for cmd in BaseCommand.__subclasses__()]
+    commands = [cmd for cmd in BaseCommand.__subclasses__()]
     _CMDS_CACHE = {cmd.command: cmd for cmd in commands}
     return _CMDS_CACHE
