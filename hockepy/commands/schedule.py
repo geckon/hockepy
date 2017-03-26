@@ -68,17 +68,17 @@ class Schedule(BaseCommand):
             h=game.time.tm_hour, m=game.time.tm_min)
         print(teams + time)
 
-    def run(self, args):
-        """Run the command with the given arguments."""
+    def run(self):
+        """Run the command."""
         logging.debug('Running the %r command.', self.command)
-        if args.first_date is None:
-            args.first_date = datetime.date.today().strftime(self.DATE_FMT)
-            logging.debug('Date empty -> using today (%s).', args.first_date)
-        if args.last_date is None:
-            args.last_date = args.first_date
-        self.args = args
+        if self.args.first_date is None:
+            self.args.first_date = datetime.date.today().strftime(self.DATE_FMT)
+            logging.debug('Date empty -> using today (%s).',
+                          self.args.first_date)
+        if self.args.last_date is None:
+            self.args.last_date = self.args.first_date
 
-        schedule = nhl.get_schedule(args.first_date, args.last_date)
+        schedule = nhl.get_schedule(self.args.first_date, self.args.last_date)
         if schedule is None:
             print('No games at all.')
             return

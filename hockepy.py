@@ -63,8 +63,9 @@ def run_hockepy():
     args = process_args(parser)
 
     logging.debug('Discovered commands: %s', cmds.keys())
-    command = cmds[args.command_name]()
-    command.run(args)
+    # Initialize and run the requested command.
+    command = cmds[args.command_name](args)
+    command.run()
     sys.exit(0)
 
 

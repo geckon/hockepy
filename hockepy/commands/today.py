@@ -43,8 +43,8 @@ class Today(BaseCommand):
                             help='print the home team first')
         return parser
 
-    def run(self, args):
+    def run(self):
         """Run the command with the given arguments."""
         logging.debug('Running the %r command.', self.command)
-        args.first_date = args.last_date = None
-        Schedule().run(args)
+        self.args.first_date = self.args.last_date = None
+        Schedule(self.args).run()

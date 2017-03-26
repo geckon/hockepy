@@ -41,12 +41,9 @@ class BaseCommand(metaclass=BaseCommandMeta):
     # This needs to be overwritten by every subclass.
     _COMMAND = None
 
-    def __init__(self):
-        """Initialize the command.
-
-        self.args will be set by run() method if needed - None for now.
-        """
-        self.args = None
+    def __init__(self, args=None):
+        """Initialize the command."""
+        self.args = args
 
     def command(self):
         """Return the command name as expected on the command line.
@@ -68,5 +65,5 @@ class BaseCommand(metaclass=BaseCommandMeta):
         It needs to be implemented as a @classmethod."""
 
     @abc.abstractmethod
-    def run(self, args):
-        """Run the command with the given arguments."""
+    def run(self):
+        """Run the command."""
