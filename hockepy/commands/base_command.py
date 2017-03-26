@@ -23,13 +23,25 @@ class BaseCommandMeta(abc.ABCMeta):
 
     It works just as abc.ABCMeta but it adds one more thing - a class
     property 'command' that each command should have. This way each
-    command (a class derived from BaseCommand) only has to define its
-    '_COMMAND' and it will work as their 'command' property.
+    actual command (a class derived from BaseCommand) only has to define
+    its '_COMMAND' class variable and it will be returned as their
+    'command' property.
     """
 
     @property
     def command(cls):
-        """Return command name as defined by the class."""
+        """Return command name as defined by the class.
+
+        This only implements a "pure" class property and won't work if
+        called on instances - for that classes need to add their
+        property (see BaseCommand). Such property is inheritable though
+        and will work for derived classes correctly as long as they set
+        their own '_COMMAND' class variable.
+        The reason is that meta classes are not included into the lookup
+        chain when accessing attributes. For more information read:
+        https://docs.python.org/3/howto/descriptor.html
+        (especially the 'Definition and Introduction' section)
+        """
         return cls._COMMAND
 
 
@@ -45,12 +57,17 @@ class BaseCommand(metaclass=BaseCommandMeta):
         """Initialize the command."""
         self.args = args
 
+    @property
     def command(self):
         """Return the command name as expected on the command line.
 
         Thanks to BaseCommandMeta meta class, the derived classes only
-        need to specify their '_COMMAND' member variable and it will
+        need to specify their '_COMMAND' class variable and it will
         work as intended.
+        It might seem redundant to implement this when we have the class
+        property added by BaseCommandMeta but without this it wouldn't
+        work for instances - see the docstring explaining the property
+        implemented by the meta class.
         """
         return type(self).command
 
