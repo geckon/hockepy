@@ -88,8 +88,10 @@ class Schedule(BaseCommand):
             if not games:
                 print('  No games for {}.'.format(date))
             else:
+                home_width = max([len(game.home) for game in games])
+                away_width = max([len(game.away) for game in games])
                 # + 1 is an additional padding
-                team_width = max([len(game.home) for game in games]) + 1
+                team_width = max(home_width, away_width) + 1
                 for game in games:
                     self.print_game(game, team_width)
             print('')
