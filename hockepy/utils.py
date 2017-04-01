@@ -14,6 +14,7 @@ This module implements various utils generally useful in hockepy.
 
 These functions are implemented:
 - datetime_to_local() - converts specified datetime object to local time
+- local_timezone() - return local time zone
 """
 
 import datetime
@@ -23,6 +24,11 @@ import time
 
 def datetime_to_local(dto):
     """Convert the given datetime object to the local time zone."""
+    return dto.astimezone(local_timezone())
+
+
+def local_timezone():
+    """Return local time zone as a datetime.timezone object."""
     if time.daylight:
         offset = time.altzone
         tz_name = time.tzname[1]
@@ -35,4 +41,4 @@ def datetime_to_local(dto):
 
     local_tz = datetime.timezone(datetime.timedelta(seconds=offset), tz_name)
     logging.debug("Local timezone is determined to be %s.", local_tz)
-    return dto.astimezone(local_tz)
+    return local_tz

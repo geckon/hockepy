@@ -21,7 +21,7 @@ import logging
 
 from hockepy import nhl
 from hockepy.commands import BaseCommand
-from hockepy.utils import datetime_to_local
+from hockepy.utils import local_timezone
 
 
 class Schedule(BaseCommand):
@@ -52,12 +52,15 @@ class Schedule(BaseCommand):
                             help='print the home team first')
         return parser
 
-    def print_game(self, game, team_width):
+    def print_game(self, game, team_width, timezone=None):
         """Print the given game.
 
         Respect 'home_first' argument and use the appropriate delimiter.
         Also print each team name so it's padded to at least
-        'team_width' characters. Print each game on one line.
+        'team_width' characters.
+        If tz is provided, print time in this time zone. Otherwise use
+        the game time's time zone.
+        Print each game on one line.
         """
         if self.args.home_first:
             teams_fmt = '{home:>{width}} : {away:<{width}}'
@@ -65,7 +68,8 @@ class Schedule(BaseCommand):
             teams_fmt = '{away:>{width}} @ {home:<{width}}'
         teams = teams_fmt.format(
             away=game.away, home=game.home, width=team_width)
-        gametime = datetime_to_local(game.time)
+        if timezone is not None:
+            gametime = game.time.astimezone(timezone)
         time = '{h:02d}:{m:02d} {tz}'.format(
             h=gametime.hour, m=gametime.minute, tz=gametime.tzname())
         print(teams + time)
@@ -81,6 +85,7 @@ class Schedule(BaseCommand):
         if self.args.last_date is None:
             self.args.last_date = self.args.first_date
 
+        local_tz = local_timezone()
         schedule = nhl.get_schedule(self.args.first_date, self.args.last_date)
         if schedule is None:
             print('No games at all.')
@@ -95,5 +100,5 @@ class Schedule(BaseCommand):
                 # + 1 is an additional padding
                 team_width = max(home_width, away_width) + 1
                 for game in games:
-                    self.print_game(game, team_width)
+                    self.print_game(game, team_width, local_tz)
             print('')
