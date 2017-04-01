@@ -18,7 +18,7 @@ These functions are implemented:
 
 import logging
 from collections import namedtuple, OrderedDict
-from datetime import datetime
+from datetime import datetime, timezone
 from urllib.parse import urljoin
 
 import requests
@@ -41,9 +41,10 @@ Game = namedtuple('Game',
 def get_schedule(start_date, end_date):
     """Return games played between the given dates.
 
-    Dates must be in YYYY-MM-DD format. Return games as an ordered
-    dictionary where keys are dates and values are lists of Game named
-    tuples. Return None if there are no games between the given dates.
+    Dates must be strings in "YYYY-MM-DD" format. Return games as
+    an ordered dictionary where keys are dates and values are lists of
+    Game named tuples. Return None if there are no games between
+    the given dates.
     """
     logging.info('Retrieving NHL schedule for %s - %s.', start_date, end_date)
     url = '{schedule_url}?startDate={start}&endDate={end}'.format(
@@ -64,9 +65,13 @@ def get_schedule(start_date, end_date):
                 logging.debug('Unable to parse time: %s', err)
                 gametime = None
 
+            # set timezone (NHL API uses UTC)
+            gametime = gametime.replace(tzinfo=timezone.utc)
+
             games.append(Game(
                 home=game['teams']['home']['team']['name'],
                 away=game['teams']['away']['team']['name'],
                 time=gametime))
         sched[day['date']] = games
+        logging.debug("Schedule found: %s", sched)
     return sched

@@ -21,6 +21,7 @@ import logging
 
 from hockepy import nhl
 from hockepy.commands import BaseCommand
+from hockepy.utils import datetime_to_local
 
 
 class Schedule(BaseCommand):
@@ -64,8 +65,9 @@ class Schedule(BaseCommand):
             teams_fmt = '{away:>{width}} @ {home:<{width}}'
         teams = teams_fmt.format(
             away=game.away, home=game.home, width=team_width)
-        time = '{h:02d}:{m:02d} UTC'.format(
-            h=game.time.hour, m=game.time.minute)
+        gametime = datetime_to_local(game.time)
+        time = '{h:02d}:{m:02d} {tz}'.format(
+            h=gametime.hour, m=gametime.minute, tz=gametime.tzname())
         print(teams + time)
 
     def run(self):
