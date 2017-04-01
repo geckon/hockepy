@@ -65,7 +65,7 @@ class Schedule(BaseCommand):
         teams = teams_fmt.format(
             away=game.away, home=game.home, width=team_width)
         time = '{h:02d}:{m:02d} UTC'.format(
-            h=game.time.tm_hour, m=game.time.tm_min)
+            h=game.time.hour, m=game.time.minute)
         print(teams + time)
 
     def run(self):

@@ -18,7 +18,7 @@ These functions are implemented:
 
 import logging
 from collections import namedtuple, OrderedDict
-from time import strptime
+from datetime import datetime
 from urllib.parse import urljoin
 
 import requests
@@ -35,7 +35,7 @@ DATETIME_FMT = '%Y-%m-%dT%H:%M:%SZ'
 Game = namedtuple('Game',
                   ['home',   # home team
                    'away',   # away team
-                   'time'])  # UTC time and date (time.struct_time format)
+                   'time'])  # UTC time and date (datetime object)
 
 
 def get_schedule(start_date, end_date):
@@ -59,7 +59,7 @@ def get_schedule(start_date, end_date):
         for game in day['games']:
             # try and parse time
             try:
-                gametime = strptime(game['gameDate'], DATETIME_FMT)
+                gametime = datetime.strptime(game['gameDate'], DATETIME_FMT)
             except ValueError as err:
                 logging.debug('Unable to parse time: %s', err)
                 gametime = None
