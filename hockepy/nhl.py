@@ -37,6 +37,7 @@ Game = namedtuple('Game',
                    'away',   # away team
                    'time'])  # UTC time and date (datetime object)
 
+
 def log_bad_response_msg(response):
     """Try and log an error message from a bad response.
 
@@ -73,7 +74,6 @@ def get_schedule(start_date, end_date):
     if response.status_code != requests.codes.ok:
         log_bad_response_msg(response)
         response.raise_for_status()
-
 
     schedule = response.json()
     if schedule['totalGames'] == 0:
