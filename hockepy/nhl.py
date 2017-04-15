@@ -37,6 +37,26 @@ Game = namedtuple('Game',
                    'away',   # away team
                    'time'])  # UTC time and date (datetime object)
 
+def log_bad_response_msg(response):
+    """Try and log an error message from a bad response.
+
+    If a bad response comes back from the NHL API, there might be
+    an error message in it. If it's the case, retrieve and log it if
+    possible. Do nothing if not.
+    """
+    # Do something for bad responses only.
+    if response.status_code == requests.codes.ok:
+        return
+
+    try:
+        json = response.json()
+        msg_number = json.get('messageNumber', None)
+        msg = json.get('message', None)
+        logging.debug('Bad response from NHL API (HTTP %d): #%d: %s',
+                      response.status_code, msg_number, msg)
+    except:
+        pass
+
 
 def get_schedule(start_date, end_date):
     """Return games played between the given dates.
@@ -49,7 +69,13 @@ def get_schedule(start_date, end_date):
     logging.info('Retrieving NHL schedule for %s - %s.', start_date, end_date)
     url = '{schedule_url}?startDate={start}&endDate={end}'.format(
         schedule_url=SCHEDULE_URL, start=start_date, end=end_date)
-    schedule = requests.get(url).json()
+    response = requests.get(url)
+    if response.status_code != requests.codes.ok:
+        log_bad_response_msg(response)
+        response.raise_for_status()
+
+
+    schedule = response.json()
     if schedule['totalGames'] == 0:
         logging.debug('No games for the period of time.')
         return None

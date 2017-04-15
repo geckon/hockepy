@@ -14,6 +14,8 @@ hockepy.nhl module tests
 import unittest
 from datetime import datetime
 
+import requests
+
 from hockepy import nhl
 
 
@@ -86,3 +88,8 @@ class TestNhl(unittest.TestCase):
         for period in self.NO_SCHEDULE_PERIODS:
             schedule = nhl.get_schedule(*period)
             self.assertEqual(schedule, None)
+
+    def test03_wrong_date_format(self):
+        """Test that get_schedule() fails graciously for wrong dates."""
+        with self.assertRaises(requests.exceptions.HTTPError):
+            nhl.get_schedule('2017-48-25', '2017-48-25')
