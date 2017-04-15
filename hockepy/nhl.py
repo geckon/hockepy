@@ -19,6 +19,7 @@ These functions are implemented:
 import logging
 from collections import namedtuple, OrderedDict
 from datetime import datetime, timezone
+from json import JSONDecodeError
 from urllib.parse import urljoin
 
 import requests
@@ -55,8 +56,9 @@ def log_bad_response_msg(response):
         msg = json.get('message', None)
         logging.debug('Bad response from NHL API (HTTP %d): #%d: %s',
                       response.status_code, msg_number, msg)
-    except:
-        pass
+    except JSONDecodeError:
+        logging.debug('Bad response from NHL API (HTTP %d).',
+                      response.status_code)
 
 
 def get_schedule(start_date, end_date):
