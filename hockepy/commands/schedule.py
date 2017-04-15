@@ -18,6 +18,7 @@ games scheduled for the given date (default is today).
 
 import datetime
 import logging
+import sys
 
 from hockepy import nhl
 from hockepy.commands import BaseCommand
@@ -84,6 +85,7 @@ class Schedule(BaseCommand):
         """Run the command."""
         logging.debug('Running the %r command.', self.command)
 
+        # Determine the date(s) the schedule is wanted for.
         if self.args.first_date is None:
             self.args.first_date = datetime.date.today().strftime(
                 self.DATE_FMT)
@@ -91,12 +93,21 @@ class Schedule(BaseCommand):
                           self.args.first_date)
         if self.args.last_date is None:
             self.args.last_date = self.args.first_date
+        try:
+            datetime.datetime.strptime(self.args.first_date, self.DATE_FMT)
+            datetime.datetime.strptime(self.args.last_date, self.DATE_FMT)
+        except ValueError:
+            print('ERROR: Dates must be in %r format.',
+                  self.DATE_FMT, file=sys.stderr)
+            exit(1)
 
+        # Should local time be considered or UTC?
         if self.args.utc:
             local_tz = None
         else:
             local_tz = local_timezone()
 
+        # Get the schedule and print it.
         schedule = nhl.get_schedule(self.args.first_date, self.args.last_date)
         if schedule is None:
             print('No games at all.')
