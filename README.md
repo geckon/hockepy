@@ -18,7 +18,7 @@ hockey fans. The easiest way to discover the features currently implemented is
 to display help:
 
     $ ./hockepy.py -h
-    usage: hockepy.py [-h] [-D] {today,schedule} ...
+    usage: hockepy.py [-h] [-D] [-v] {today,schedule} ...
 
     positional arguments:
       {today,schedule}
@@ -26,17 +26,22 @@ to display help:
     optional arguments:
       -h, --help        show this help message and exit
       -D, --debug       turn debug output on
+      -v, --verbose     turn verbose output on
 
 Subcommands also support `-h` option:
 
     $ ./hockepy.py schedule -h
-    usage: hockepy.py schedule [-h] [date]
+    usage: hockepy.py schedule [-h] [--home-first] [--utc]
+                               [first_date] [last_date]
 
     positional arguments:
-      date        date to get schedule for
+      first_date    first date to get schedule for
+      last_date     last date to get schedule for
 
     optional arguments:
-      -h, --help  show this help message and exit
+      -h, --help    show this help message and exit
+      --home-first  print the home team first
+      --utc         print times in UTC instead of local time
 
 Bear in mind that the actual help may differ as this listing won't necessarily
 be updated with any feature addition/change.
