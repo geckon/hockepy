@@ -50,6 +50,8 @@ class Schedule(BaseCommand):
         parser.add_argument('--home-first', dest='home_first',
                             action='store_true',
                             help='print the home team first')
+        parser.add_argument('--utc', dest='utc', action='store_true',
+                            help='print times in UTC instead of local time')
         return parser
 
     def print_game(self, game, team_width, timezone=None):
@@ -68,15 +70,20 @@ class Schedule(BaseCommand):
             teams_fmt = '{away:>{width}} @ {home:<{width}}'
         teams = teams_fmt.format(
             away=game.away, home=game.home, width=team_width)
-        if timezone is not None:
+
+        if timezone:
             gametime = game.time.astimezone(timezone)
+        else:
+            gametime = game.time
         time = '{h:02d}:{m:02d} {tz}'.format(
             h=gametime.hour, m=gametime.minute, tz=gametime.tzname())
+
         print(teams + time)
 
     def run(self):
         """Run the command."""
         logging.debug('Running the %r command.', self.command)
+
         if self.args.first_date is None:
             self.args.first_date = datetime.date.today().strftime(
                 self.DATE_FMT)
@@ -85,7 +92,11 @@ class Schedule(BaseCommand):
         if self.args.last_date is None:
             self.args.last_date = self.args.first_date
 
-        local_tz = local_timezone()
+        if self.args.utc:
+            local_tz = None
+        else:
+            local_tz = local_timezone()
+
         schedule = nhl.get_schedule(self.args.first_date, self.args.last_date)
         if schedule is None:
             print('No games at all.')

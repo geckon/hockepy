@@ -41,6 +41,8 @@ class Today(BaseCommand):
         parser.add_argument('--home-first', dest='home_first',
                             action='store_true',
                             help='print the home team first')
+        parser.add_argument('--utc', dest='utc', action='store_true',
+                            help='print times in UTC instead of local time')
         return parser
 
     def run(self):
