@@ -47,7 +47,7 @@ def log_bad_response_msg(response):
     possible. Do nothing if not.
     """
     # Do something for bad responses only.
-    if response.status_code == requests.codes.ok:
+    if response.status_code == requests.codes['ok']:
         return
 
     try:
@@ -73,7 +73,7 @@ def get_schedule(start_date, end_date):
     url = '{schedule_url}?startDate={start}&endDate={end}'.format(
         schedule_url=SCHEDULE_URL, start=start_date, end=end_date)
     response = requests.get(url)
-    if response.status_code != requests.codes.ok:
+    if response.status_code != requests.codes['ok']:
         log_bad_response_msg(response)
         response.raise_for_status()
 
