@@ -63,23 +63,14 @@ def log_bad_response_msg(response):
                       response.status_code)
 
 
-def get_schedule(start_date, end_date):
-    """Return games played between the given dates.
+def parse_schedule(schedule):
+    """Return games played according to the schedule.
 
-    Dates must be strings in "YYYY-MM-DD" format. Return games as
-    an ordered dictionary where keys are dates and values are lists of
-    Game named tuples. Return None if there are no games between
-    the given dates.
+    The schedule is expected in JSON format as returned from the NHL API
+    exactly. Return games as an ordered dictionary where keys are dates
+    and values are lists of Game named tuples. Return None if there are
+    no games in the given schedule.
     """
-    logging.info('Retrieving NHL schedule for %s - %s.', start_date, end_date)
-    url = '{schedule_url}?startDate={start}&endDate={end}'.format(
-        schedule_url=SCHEDULE_URL, start=start_date, end=end_date)
-    response = requests.get(url)
-    if response.status_code != requests.codes['ok']:
-        log_bad_response_msg(response)
-        response.raise_for_status()
-
-    schedule = response.json()
     if schedule['totalGames'] == 0:
         logging.debug('No games for the period of time.')
         return None
@@ -105,3 +96,22 @@ def get_schedule(start_date, end_date):
         sched[day['date']] = games
         logging.debug("Schedule found: %s", sched)
     return sched
+
+
+def get_schedule(start_date, end_date):
+    """Return games played between the given dates.
+
+    Dates must be strings in "YYYY-MM-DD" format. Return games as
+    an ordered dictionary where keys are dates and values are lists of
+    Game named tuples. Return None if there are no games between
+    the given dates.
+    """
+    logging.info('Retrieving NHL schedule for %s - %s.', start_date, end_date)
+    url = '{schedule_url}?startDate={start}&endDate={end}'.format(
+        schedule_url=SCHEDULE_URL, start=start_date, end=end_date)
+    response = requests.get(url)
+    if response.status_code != requests.codes['ok']:
+        log_bad_response_msg(response)
+        response.raise_for_status()
+
+    return parse_schedule(response.json())
