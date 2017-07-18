@@ -1,0 +1,72 @@
+{
+  "copyright": "(c) 2107 by Tomáš Heger",
+  "totalItems": 1,
+  "totalEvents": 0,
+  "totalGames": 1,
+  "totalMatches": 0,
+  "wait": 10,
+  "dates": [
+    {
+      "date": "2017-07-07",
+      "totalItems": 1,
+      "totalEvents": 0,
+      "totalGames": 1,
+      "totalMatches": 0,
+      "games": [
+        {
+          "gamePk": 201707070001,
+          "link": "/api/v1/game/201707040001/feed/live",
+          "gameType": "R",
+          "season": "20172018",
+          "gameDate": "2017-07-07T21:00:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "1",
+            "detailedState": "Scheduled",
+            "statusCode": "1",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 1,
+                "name": "Springfield Electrons",
+                "link": "/api/v1/teams/1"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 2,
+                "name": "Gotham City Bats",
+                "link": "/api/v1/teams/2"
+              }
+            }
+          },
+          "venue": {
+            "name": "Bat Cave Center",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707040001/content"
+          }
+        }
+      ],
+      "events": [],
+      "matches": []
+    }
+  ]
+}
