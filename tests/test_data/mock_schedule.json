@@ -1,0 +1,234 @@
+{
+  "copyright": "(c) 2107 by Tomáš Heger",
+  "totalItems": 4,
+  "totalEvents": 0,
+  "totalGames": 4,
+  "totalMatches": 0,
+  "wait": 10,
+  "dates": [
+    {
+      "date": "2017-07-04",
+      "totalItems": 1,
+      "totalEvents": 0,
+      "totalGames": 1,
+      "totalMatches": 0,
+      "games": [
+        {
+          "gamePk": 201707040001,
+          "link": "/api/v1/game/201707040001/feed/live",
+          "gameType": "R",
+          "season": "20172018",
+          "gameDate": "2017-07-04T21:00:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "1",
+            "detailedState": "Scheduled",
+            "statusCode": "1",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 1,
+                "name": "Springfield Electrons",
+                "link": "/api/v1/teams/1"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 2,
+                "name": "Gotham City Bats",
+                "link": "/api/v1/teams/2"
+              }
+            }
+          },
+          "venue": {
+            "name": "Bat Cave Center",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707040001/content"
+          }
+        }
+      ]
+    },
+    {
+      "date": "2017-07-07",
+      "totalItems": 3,
+      "totalEvents": 0,
+      "totalGames": 3,
+      "totalMatches": 0,
+      "games": [
+        {
+          "gamePk": 201707040002,
+          "link": "/api/v1/game/201707040002/feed/live",
+          "gameType": "R",
+          "season": "20172018",
+          "gameDate": "2017-07-05T00:00:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "1",
+            "detailedState": "Scheduled",
+            "statusCode": "1",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 3,
+                "name": "Sin City Sinners",
+                "link": "/api/v1/teams/3"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 4,
+                "name": "Hill Valley Time Travelers",
+                "link": "/api/v1/teams/4"
+              }
+            }
+          },
+          "venue": {
+            "name": "Clock Tower Arena",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707040002/content"
+          }
+        },
+        {
+          "gamePk": 201707040003,
+          "link": "/api/v1/game/201707040003/feed/live",
+          "gameType": "R",
+          "season": "20172018",
+          "gameDate": "2017-07-05T04:00:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "1",
+            "detailedState": "Scheduled",
+            "statusCode": "1",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 5,
+                "name": "Los Santos Gangsters",
+                "link": "/api/v1/teams/5"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 6,
+                "name": "Castle Black Crows",
+                "link": "/api/v1/teams/6"
+              }
+            }
+          },
+          "venue": {
+            "name": "The Wall Ice Palace",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707040003/content"
+          }
+        },
+        {
+          "gamePk": 201707040004,
+          "link": "/api/v1/game/201707040004/feed/live",
+          "gameType": "R",
+          "season": "20172018",
+          "gameDate": "2017-07-05T01:30:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "1",
+            "detailedState": "Scheduled",
+            "statusCode": "1",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 7,
+                "name": "Hogsmeade Wizards",
+                "link": "/api/v1/teams/7"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 8,
+                "name": "Shire Halflings",
+                "link": "/api/v1/teams/8"
+              }
+            }
+          },
+          "venue": {
+            "name": "Bag End Place",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707040004/content"
+          }
+        }
+      ],
+      "events": [],
+      "matches": []
+    }
+  ]
+}

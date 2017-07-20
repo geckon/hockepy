@@ -13,6 +13,7 @@ hockepy.nhl module tests
 ------------------------
 """
 
+import json
 import unittest
 from datetime import datetime
 
@@ -36,13 +37,13 @@ class TestNhl(unittest.TestCase):
                      away='Tampa Bay Lightning',
                      time=datetime.strptime('2014-01-02T03:00:00+0000',
                                             TIME_FMT)),
-            ]},
+        ]},
         '2016-06-01': {'2016-06-01': [
             nhl.Game(home='Pittsburgh Penguins',
                      away='San Jose Sharks',
                      time=datetime.strptime('2016-06-02T00:00:00+0000',
                                             TIME_FMT)),
-            ]},
+        ]},
         '2016-07-01': None,
         '2017-02-05': {'2017-02-05': [
             nhl.Game(home='New York Rangers',
@@ -57,8 +58,31 @@ class TestNhl(unittest.TestCase):
                      away='Los Angeles Kings',
                      time=datetime.strptime('2017-02-05T17:00:00+0000',
                                             TIME_FMT)),
-            ]}
-        }
+        ]}
+    }
+
+    MOCK_SCHEDULE = {
+        '2017-07-04': [
+            nhl.Game(home='Gotham City Bats',
+                     away='Springfield Electrons',
+                     time=datetime.strptime('2017-07-04T21:00:00+0000',
+                                            TIME_FMT))
+        ],
+        '2017-07-07': [
+            nhl.Game(home='Hill Valley Time Travelers',
+                     away='Sin City Sinners',
+                     time=datetime.strptime('2017-07-05T00:00:00+0000',
+                                            TIME_FMT)),
+            nhl.Game(home='Castle Black Crows',
+                     away='Los Santos Gangsters',
+                     time=datetime.strptime('2017-07-05T04:00:00+0000',
+                                            TIME_FMT)),
+            nhl.Game(home='Shire Halflings',
+                     away='Hogsmeade Wizards',
+                     time=datetime.strptime('2017-07-05T01:30:00+0000',
+                                            TIME_FMT)),
+        ]
+    }
 
     NO_SCHEDULE_PERIODS = {
         ('2016-07-01', '2016-07-01'),
@@ -95,3 +119,17 @@ class TestNhl(unittest.TestCase):
         """Test that get_schedule() fails graciously for wrong dates."""
         with self.assertRaises(requests.exceptions.HTTPError):
             nhl.get_schedule('2017-48-25', '2017-48-25')
+
+    def test04_parse_schedule_mock(self):
+        """Test that parse_schedule() returns expected values.
+
+        Instead of hitting NHL API, mock JSON file is parsed here.
+        """
+        with open("tests/test_data/mock_schedule.json") as schedule_file:
+            schedule = nhl.parse_schedule(json.loads(schedule_file.read()))
+
+        self.assertEqual(len(self.MOCK_SCHEDULE), len(schedule))
+        for day in self.MOCK_SCHEDULE:
+            self.assertEqual(len(self.MOCK_SCHEDULE[day]), len(schedule[day]))
+            for game in schedule[day]:
+                self.assertIn(game, self.MOCK_SCHEDULE[day])
