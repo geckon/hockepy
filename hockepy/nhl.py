@@ -38,7 +38,8 @@ DATETIME_FMT = '%Y-%m-%dT%H:%M:%SZ'
 Game = namedtuple('Game',
                   ['home',   # home team
                    'away',   # away team
-                   'time'])  # UTC time and date (datetime object)
+                   'time',   # UTC time and date (datetime object)
+                   'type'])  # PR/R/P (pre-season, regular, playoffs)
 
 
 def log_bad_response_msg(response):
@@ -92,7 +93,8 @@ def parse_schedule(schedule):
             games.append(Game(
                 home=game['teams']['home']['team']['name'],
                 away=game['teams']['away']['team']['name'],
-                time=gametime))
+                time=gametime,
+                type=game['gameType']))
         sched[day['date']] = games
         logging.debug("Schedule found: %s", sched)
     return sched

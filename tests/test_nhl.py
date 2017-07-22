@@ -32,32 +32,38 @@ class TestNhl(unittest.TestCase):
             nhl.Game(home='Detroit Red Wings',
                      away='Toronto Maple Leafs',
                      time=datetime.strptime('2014-01-01T18:00:00+0000',
-                                            TIME_FMT)),
+                                            TIME_FMT),
+                     type='R'),
             nhl.Game(home='Vancouver Canucks',
                      away='Tampa Bay Lightning',
                      time=datetime.strptime('2014-01-02T03:00:00+0000',
-                                            TIME_FMT)),
+                                            TIME_FMT),
+                     type='R'),
         ]},
         '2016-06-01': {'2016-06-01': [
             nhl.Game(home='Pittsburgh Penguins',
                      away='San Jose Sharks',
                      time=datetime.strptime('2016-06-02T00:00:00+0000',
-                                            TIME_FMT)),
+                                            TIME_FMT),
+                     type='P'),
         ]},
         '2016-07-01': None,
         '2017-02-05': {'2017-02-05': [
             nhl.Game(home='New York Rangers',
                      away='Calgary Flames',
                      time=datetime.strptime('2017-02-05T19:00:00+0000',
-                                            TIME_FMT)),
+                                            TIME_FMT),
+                     type='R'),
             nhl.Game(home='Montréal Canadiens',
                      away='Edmonton Oilers',
                      time=datetime.strptime('2017-02-05T18:00:00+0000',
-                                            TIME_FMT)),
+                                            TIME_FMT),
+                     type='R'),
             nhl.Game(home='Washington Capitals',
                      away='Los Angeles Kings',
                      time=datetime.strptime('2017-02-05T17:00:00+0000',
-                                            TIME_FMT)),
+                                            TIME_FMT),
+                     type='R'),
         ]}
     }
 
@@ -66,21 +72,25 @@ class TestNhl(unittest.TestCase):
             nhl.Game(home='Gotham City Bats',
                      away='Springfield Electrons',
                      time=datetime.strptime('2017-07-04T21:00:00+0000',
-                                            TIME_FMT))
+                                            TIME_FMT),
+                     type='R')
         ],
         '2017-07-07': [
             nhl.Game(home='Hill Valley Time Travelers',
                      away='Sin City Sinners',
                      time=datetime.strptime('2017-07-05T00:00:00+0000',
-                                            TIME_FMT)),
+                                            TIME_FMT),
+                     type='PR'),
             nhl.Game(home='Castle Black Crows',
                      away='Los Santos Gangsters',
                      time=datetime.strptime('2017-07-05T04:00:00+0000',
-                                            TIME_FMT)),
+                                            TIME_FMT),
+                     type='R'),
             nhl.Game(home='Shire Halflings',
                      away='Hogsmeade Wizards',
                      time=datetime.strptime('2017-07-05T01:30:00+0000',
-                                            TIME_FMT)),
+                                            TIME_FMT),
+                     type='P'),
         ]
     }
 
@@ -138,4 +148,3 @@ class TestNhl(unittest.TestCase):
         with open("tests/test_data/empty_schedule.json") as schedule_file:
             schedule = nhl.parse_schedule(json.loads(schedule_file.read()))
         self.assertEqual(schedule, None)
-
