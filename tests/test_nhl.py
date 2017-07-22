@@ -145,6 +145,7 @@ class TestNhl(unittest.TestCase):
                 self.assertIn(game, self.MOCK_SCHEDULE[day])
 
     def test05_parse_schedule_empty(self):
+        """Test that an empty schedule is correctly parsed."""
         with open("tests/test_data/empty_schedule.json") as schedule_file:
             schedule = nhl.parse_schedule(json.loads(schedule_file.read()))
         self.assertEqual(schedule, None)
