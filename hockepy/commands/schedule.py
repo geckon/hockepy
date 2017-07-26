@@ -99,8 +99,8 @@ class Schedule(BaseCommand):
             datetime.datetime.strptime(self.args.first_date, self.DATE_FMT)
             datetime.datetime.strptime(self.args.last_date, self.DATE_FMT)
         except ValueError:
-            print('ERROR: Dates must be in %r format.',
-                  self.DATE_FMT, file=sys.stderr)
+            print('ERROR: Dates must be in "{}" format.'.format(self.DATE_FMT),
+                  file=sys.stderr)
             exit(1)
 
         # Should local time be considered or UTC?
