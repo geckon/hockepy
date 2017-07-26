@@ -67,6 +67,8 @@ class Schedule(BaseCommand):
         the game time's time zone.
         Print each game on one line.
         """
+        gametype = '{:<2}'.format(game.type)
+
         if self.args.home_first:
             teams_fmt = '{home:>{width}} : {away:<{width}}'
         else:
@@ -81,7 +83,7 @@ class Schedule(BaseCommand):
         time = '{h:02d}:{m:02d} {tz}'.format(
             h=gametime.hour, m=gametime.minute, tz=gametime.tzname())
 
-        print(teams + time)
+        print(' '.join((gametype, teams, time)))
 
     def run(self):
         """Run the command."""
