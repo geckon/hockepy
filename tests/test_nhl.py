@@ -14,6 +14,7 @@ hockepy.nhl module tests
 """
 
 import json
+import os
 import unittest
 from datetime import datetime
 
@@ -24,6 +25,8 @@ from hockepy import nhl
 
 class TestNhl(unittest.TestCase):
     """Tests for hockepy.nhl module."""
+
+    TEST_DATA = 'tests/test_data'
 
     TIME_FMT = '%Y-%m-%dT%H:%M:%S%z'
 
@@ -135,7 +138,8 @@ class TestNhl(unittest.TestCase):
 
         Instead of hitting NHL API, mock JSON file is parsed here.
         """
-        with open("tests/test_data/nhl_mock_schedule.json") as schedule_file:
+        sched_path = os.path.join(self.TEST_DATA, 'nhl_mock_schedule.json')
+        with open(sched_path) as schedule_file:
             schedule = nhl.parse_schedule(json.loads(schedule_file.read()))
 
         self.assertEqual(len(self.MOCK_SCHEDULE), len(schedule))
@@ -146,6 +150,7 @@ class TestNhl(unittest.TestCase):
 
     def test05_parse_schedule_empty(self):
         """Test that an empty schedule is correctly parsed."""
-        with open("tests/test_data/nhl_empty_schedule.json") as schedule_file:
+        sched_path = os.path.join(self.TEST_DATA, 'nhl_empty_schedule.json')
+        with open(sched_path) as schedule_file:
             schedule = nhl.parse_schedule(json.loads(schedule_file.read()))
         self.assertEqual(schedule, None)
