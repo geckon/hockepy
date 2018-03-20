@@ -35,10 +35,11 @@ SCHEDULE_URL = urljoin(API_URL, 'schedule')
 DATETIME_FMT = '%Y-%m-%dT%H:%M:%SZ'
 
 Game = namedtuple('Game',
-                  ['home',   # home team
-                   'away',   # away team
-                   'time',   # UTC time and date (datetime object)
-                   'type'])  # PR/R/P (pre-season, regular, playoffs)
+                  ['home',     # home team
+                   'away',     # away team
+                   'time',     # UTC time and date (datetime object)
+                   'type',     # PR/R/P (pre-season, regular, playoffs)
+                   'status'])  # Final, Scheduled,...
 
 
 def log_bad_response_msg(response):
@@ -93,7 +94,8 @@ def parse_schedule(schedule):
                 home=game['teams']['home']['team']['name'],
                 away=game['teams']['away']['team']['name'],
                 time=gametime,
-                type=game['gameType']))
+                type=game['gameType'],
+                status=game['status']['detailedState']))
         sched[day['date']] = games
         logging.debug("Schedule found: %s", sched)
     return sched
