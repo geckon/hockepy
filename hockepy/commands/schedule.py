@@ -83,7 +83,9 @@ class Schedule(BaseCommand):
         time = '{h:02d}:{m:02d} {tz}'.format(
             h=gametime.hour, m=gametime.minute, tz=gametime.tzname())
 
-        print(' '.join((gametype, teams, time)))
+        status = '({})'.format(game.status)
+
+        print(' '.join((gametype, teams, time, status)))
 
     def run(self):
         """Run the command."""
