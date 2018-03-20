@@ -181,12 +181,12 @@
           "gameType": "P",
           "season": "20172018",
           "gameDate": "2017-07-05T01:30:00Z",
-          "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "1",
-            "detailedState": "Scheduled",
-            "statusCode": "1",
-            "startTimeTBD": false
+          "status" : {
+            "abstractGameState" : "Final",
+            "codedGameState" : "7",
+            "detailedState" : "Final",
+            "statusCode" : "7",
+            "startTimeTBD" : false
           },
           "teams": {
             "away": {
