@@ -7,6 +7,7 @@
 
 _(pronounced like hockey-py so probably something like_ /ˈhɑː.kipaɪ/_)_
 
+[![Build Status](https://travis-ci.org/geckon/hockepy.svg?branch=master)](https://travis-ci.org/geckon/hockepy)
 
 **Important:** Please keep in mind that `hockepy` is under active development
 and any part can be changed anytime.
