@@ -15,5 +15,8 @@ pep8:
 pylint:
 	pylint --reports=n hocke.py hockepy tests
 
+pylint-error:
+	pylint --reports=n --disable=C,R,W hocke.py hockepy tests
+
 test:
 	python -m unittest discover -v tests
