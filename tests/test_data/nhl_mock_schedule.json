@@ -1,8 +1,8 @@
 {
-  "copyright": "(c) 2107 by Tomáš Heger",
-  "totalItems": 4,
+  "copyright": "(c) 2017 - 2018 by Tomáš Heger",
+  "totalItems": 7,
   "totalEvents": 0,
-  "totalGames": 4,
+  "totalGames": 7,
   "totalMatches": 0,
   "wait": 10,
   "dates": [
@@ -20,10 +20,10 @@
           "season": "20172018",
           "gameDate": "2017-07-04T21:00:00Z",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "1",
-            "detailedState": "Scheduled",
-            "statusCode": "1",
+            "abstractGameState": "Final",
+            "codedGameState": "7",
+            "detailedState": "Final",
+            "statusCode": "7",
             "startTimeTBD": false
           },
           "teams": {
@@ -74,16 +74,16 @@
       "totalMatches": 0,
       "games": [
         {
-          "gamePk": 201707040002,
-          "link": "/api/v1/game/201707040002/feed/live",
+          "gamePk": 201707070001,
+          "link": "/api/v1/game/201707070001/feed/live",
           "gameType": "PR",
           "season": "20172018",
-          "gameDate": "2017-07-05T00:00:00Z",
+          "gameDate": "2017-07-08T00:00:00Z",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "1",
-            "detailedState": "Scheduled",
-            "statusCode": "1",
+            "abstractGameState": "Final",
+            "codedGameState": "6",
+            "detailedState": "Final",
+            "statusCode": "6",
             "startTimeTBD": false
           },
           "teams": {
@@ -121,20 +121,20 @@
             "link": "/api/v1/venues/null"
           },
           "content": {
-            "link": "/api/v1/game/201707040002/content"
+            "link": "/api/v1/game/201707070001/content"
           }
         },
         {
-          "gamePk": 201707040003,
-          "link": "/api/v1/game/201707040003/feed/live",
+          "gamePk": 201707070002,
+          "link": "/api/v1/game/201707070002/feed/live",
           "gameType": "R",
           "season": "20172018",
-          "gameDate": "2017-07-05T04:00:00Z",
+          "gameDate": "2017-07-08T03:00:00Z",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "1",
-            "detailedState": "Scheduled",
-            "statusCode": "1",
+            "abstractGameState": "Final",
+            "codedGameState": "5",
+            "detailedState": "Game Over",
+            "statusCode": "5",
             "startTimeTBD": false
           },
           "teams": {
@@ -172,20 +172,20 @@
             "link": "/api/v1/venues/null"
           },
           "content": {
-            "link": "/api/v1/game/201707040003/content"
+            "link": "/api/v1/game/201707070002/content"
           }
         },
         {
-          "gamePk": 201707040004,
-          "link": "/api/v1/game/201707040004/feed/live",
+          "gamePk": 201707070003,
+          "link": "/api/v1/game/201707070003/feed/live",
           "gameType": "P",
           "season": "20172018",
-          "gameDate": "2017-07-05T01:30:00Z",
+          "gameDate": "2017-07-07T20:30:00Z",
           "status": {
-            "abstractGameState": "Final",
-            "codedGameState": "7",
-            "detailedState": "Final",
-            "statusCode": "7",
+            "abstractGameState": "Live",
+            "codedGameState": "4",
+            "detailedState": "In Progress - Critical",
+            "statusCode": "4",
             "startTimeTBD": false
           },
           "teams": {
@@ -223,7 +223,171 @@
             "link": "/api/v1/venues/null"
           },
           "content": {
-            "link": "/api/v1/game/201707040004/content"
+            "link": "/api/v1/game/201707070003/content"
+          }
+        }
+      ],
+      "events": [],
+      "matches": []
+    },
+    {
+      "date": "2017-07-08",
+      "totalItems": 3,
+      "totalEvents": 0,
+      "totalGames": 3,
+      "totalMatches": 0,
+      "games": [
+        {
+          "gamePk": 201707080001,
+          "link": "/api/v1/game/201707080001/feed/live",
+          "gameType": "P",
+          "season": "20172018",
+          "gameDate": "2017-07-09T01:00:00Z",
+          "status": {
+            "abstractGameState": "Live",
+            "codedGameState": "3",
+            "detailedState": "In Progress",
+            "statusCode": "3",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 9,
+                "name": "Albuquerque Meths",
+                "link": "/api/v1/teams/9"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 10,
+                "name": "Smallville Reporters",
+                "link": "/api/v1/teams/10"
+              }
+            }
+          },
+          "venue": {
+            "name": "Superboy Arena",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707080001/content"
+          }
+        },
+        {
+          "gamePk": 201707080002,
+          "link": "/api/v1/game/201707080002/feed/live",
+          "gameType": "P",
+          "season": "20172018",
+          "gameDate": "2017-07-08T21:30:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "2",
+            "detailedState": "Pre-Game",
+            "statusCode": "2",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 4,
+                "name": "Hill Valley Time Travelers",
+                "link": "/api/v1/teams/4"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 12,
+                "name": "Asgard Gods",
+                "link": "/api/v1/teams/12"
+              }
+            }
+          },
+          "venue": {
+            "name": "ThorLoki Garden",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707080002/content"
+          }
+        },
+        {
+          "gamePk": 201707080003,
+          "link": "/api/v1/game/201707080003/feed/live",
+          "gameType": "P",
+          "season": "20172018",
+          "gameDate": "2017-07-09T01:30:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "1",
+            "detailedState": "Scheduled",
+            "statusCode": "1",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 2,
+                "name": "Gotham City Bats",
+                "link": "/api/v1/teams/2"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 7,
+                "name": "Hogsmeade Wizards",
+                "link": "/api/v1/teams/7"
+              }
+            }
+          },
+          "venue": {
+            "name": "Three Hockeysticks Dome",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707080003/content"
           }
         }
       ],
