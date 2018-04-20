@@ -34,7 +34,7 @@
                 "ot": 0,
                 "type": "league"
               },
-              "score": 0,
+              "score": 3,
               "team": {
                 "id": 1,
                 "name": "Springfield Electrons",
@@ -48,7 +48,7 @@
                 "ot": 0,
                 "type": "league"
               },
-              "score": 0,
+              "score": 2,
               "team": {
                 "id": 2,
                 "name": "Gotham City Bats",
@@ -94,7 +94,7 @@
                 "ot": 0,
                 "type": "league"
               },
-              "score": 0,
+              "score": 2,
               "team": {
                 "id": 3,
                 "name": "Sin City Sinners",
@@ -108,7 +108,7 @@
                 "ot": 0,
                 "type": "league"
               },
-              "score": 0,
+              "score": 3,
               "team": {
                 "id": 4,
                 "name": "Hill Valley Time Travelers",
@@ -145,7 +145,7 @@
                 "ot": 0,
                 "type": "league"
               },
-              "score": 0,
+              "score": 4,
               "team": {
                 "id": 5,
                 "name": "Los Santos Gangsters",
@@ -210,7 +210,7 @@
                 "ot": 0,
                 "type": "league"
               },
-              "score": 0,
+              "score": 1,
               "team": {
                 "id": 8,
                 "name": "Shire Halflings",
@@ -258,7 +258,7 @@
                 "ot": 0,
                 "type": "league"
               },
-              "score": 0,
+              "score": 6,
               "team": {
                 "id": 9,
                 "name": "Albuquerque Meths",
@@ -272,7 +272,7 @@
                 "ot": 0,
                 "type": "league"
               },
-              "score": 0,
+              "score": 6,
               "team": {
                 "id": 10,
                 "name": "Smallville Reporters",
