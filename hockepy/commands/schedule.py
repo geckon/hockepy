@@ -71,8 +71,10 @@ class Schedule(BaseCommand):
 
         if self.args.home_first:
             teams_fmt = '{home:>{width}} : {away:<{width}}'
+            score_fmt = '{home}:{away}'
         else:
             teams_fmt = '{away:>{width}} @ {home:<{width}}'
+            score_fmt = '{away}:{home}'
         teams = teams_fmt.format(
             away=game.away, home=game.home, width=team_width)
 
@@ -83,9 +85,14 @@ class Schedule(BaseCommand):
         time = '{h:02d}:{m:02d} {tz}'.format(
             h=gametime.hour, m=gametime.minute, tz=gametime.tzname())
 
+        if int(game.status_code) > 2:
+            score = score_fmt.format(away=game.away_score, home=game.home_score)
+        else:
+            score = '   '
+
         status = '({})'.format(game.status)
 
-        print(' '.join((gametype, teams, time, status)))
+        print(' '.join((gametype, teams, time, score, status)))
 
     def run(self):
         """Run the command."""
