@@ -35,14 +35,14 @@ SCHEDULE_URL = urljoin(API_URL, 'schedule')
 DATETIME_FMT = '%Y-%m-%dT%H:%M:%SZ'
 
 Game = namedtuple('Game',
-                  ['home',        # home team
-                   'away',        # away team
-                   'home_score',  # home team's score
-                   'away_score',  # away team's score
-                   'time',        # UTC time and date (datetime object)
-                   'type',        # PR/R/P (pre-season, regular, playoffs)
-                   'status_code', # 1-7
-                   'status'])     # Final, Scheduled,...
+                  ['home',         # home team
+                   'away',         # away team
+                   'home_score',   # home team's score
+                   'away_score',   # away team's score
+                   'time',         # UTC time and date (datetime object)
+                   'type',         # PR/R/P (pre-season, regular, playoffs)
+                   'status_code',  # 1-7
+                   'status'])      # Final, Scheduled,...
 
 
 def log_bad_response_msg(response):

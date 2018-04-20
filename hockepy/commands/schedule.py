@@ -86,7 +86,8 @@ class Schedule(BaseCommand):
             h=gametime.hour, m=gametime.minute, tz=gametime.tzname())
 
         if int(game.status_code) > 2:
-            score = score_fmt.format(away=game.away_score, home=game.home_score)
+            score = score_fmt.format(away=game.away_score,
+                                     home=game.home_score)
         else:
             score = '   '
 
