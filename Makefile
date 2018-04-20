@@ -9,8 +9,8 @@
 init:
 	pip install -r requirements.txt
 
-pep8:
-	pep8 --exclude=venv --filename="*.py" .
+pycodestyle:
+	pycodestyle --exclude=venv --filename="*.py" .
 
 pylint:
 	pylint --reports=n hocke.py hockepy tests

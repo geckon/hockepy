@@ -14,7 +14,7 @@ install:
 # command to run tests
 script:
   - make test
-  - make pep8
+  - make pycodestyle
   - make pylint-error
 
 notifications:
