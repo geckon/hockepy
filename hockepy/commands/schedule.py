@@ -24,6 +24,7 @@ import sys
 
 from hockepy import nhl
 from hockepy.commands import BaseCommand
+from hockepy.game import has_started
 from hockepy.utils import local_timezone
 
 
@@ -85,7 +86,7 @@ class Schedule(BaseCommand):
         time = '{h:02d}:{m:02d} {tz}'.format(
             h=gametime.hour, m=gametime.minute, tz=gametime.tzname())
 
-        if int(game.status_code) > 2:
+        if has_started(game):
             score = score_fmt.format(away=game.away_score,
                                      home=game.home_score)
         else:
