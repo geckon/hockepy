@@ -19,14 +19,18 @@ These functions are implemented:
 - parse_schedule() returns Games as parsed from the given JSON schedule
 - log_bad_response_msg() logs error message from a bad response from
     the NHL API if possible
+- get_status() returns GameStatus for NHL API's statusCode
+- get_type() returns GameType for NHL API's gameType
 """
 
 import logging
-from collections import namedtuple, OrderedDict
+from collections import OrderedDict
 from datetime import datetime, timezone
 from urllib.parse import urljoin
 
 import requests
+
+from hockepy.game import Game, GameStatus, GameType
 
 # URL to the NHL API
 API_URL = 'https://statsapi.web.nhl.com/api/v1/'
@@ -36,16 +40,6 @@ SCHEDULE_URL = urljoin(API_URL, 'schedule')
 
 # Date/time used by the API
 DATETIME_FMT = '%Y-%m-%dT%H:%M:%SZ'
-
-Game = namedtuple('Game',
-                  ['home',         # home team
-                   'away',         # away team
-                   'home_score',   # home team's score
-                   'away_score',   # away team's score
-                   'time',         # UTC time and date (datetime object)
-                   'type',         # PR/R/P (pre-season, regular, playoffs)
-                   'status_code',  # 1-7
-                   'status'])      # Final, Scheduled,...
 
 
 def log_bad_response_msg(response):
@@ -102,12 +96,29 @@ def parse_schedule(schedule):
                 home_score=game['teams']['home']['score'],
                 away_score=game['teams']['away']['score'],
                 time=gametime,
-                type=game['gameType'],
-                status_code=game['status']['statusCode'],
-                status=game['status']['detailedState']))
+                type=get_type(game['gameType']),
+                status=get_status(game['status']['statusCode'])))
         sched[day['date']] = games
         logging.debug("Schedule found: %s", sched)
     return sched
+
+
+def get_status(status_code):
+    """Return GameStatus for the given NHL API's statusCode."""
+    if status_code in ('1', '2'):
+        return GameStatus.SCHEDULED
+    if status_code in ('3', '4'):
+        return GameStatus.LIVE
+    return GameStatus.FINAL
+
+
+def get_type(game_type):
+    """Return GameType for the given NHL API's gameType."""
+    if game_type == 'PR':
+        return GameType.PRESEASON
+    if game_type == 'R':
+        return GameType.REGULAR
+    return GameType.PLAYOFFS
 
 
 def get_schedule(start_date, end_date):
