@@ -16,6 +16,9 @@ This module implements access to a subset of NHL API.
 
 These functions are implemented:
 - get_schedule() returns games played on specified days.
+- parse_schedule() returns Games as parsed from the given JSON schedule
+- log_bad_response_msg() logs error message from a bad response from
+    the NHL API if possible
 """
 
 import logging
