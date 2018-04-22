@@ -33,15 +33,19 @@ Game = namedtuple(
      'time',        # UTC time and date (datetime object)
      'type',        # GameType instance
      'status'       # GameStatus instance
-     ])
+    ])
 
 
 def has_started(game):
-    return (game.status.value > 1)
+    """Return true if the given game has started, False otherwise.
+
+    Basically that means True for games that are LIVE or FINAL."""
+    return game.status.value > 1
 
 
 @unique
 class GameStatus(Enum):
+    """Game status enum."""
     SCHEDULED = 1
     LIVE = 2
     FINAL = 3
@@ -49,6 +53,7 @@ class GameStatus(Enum):
 
 @unique
 class GameType(Enum):
+    """Game type enum."""
     PRESEASON = 1
     REGULAR = 2
     PLAYOFFS = 3
