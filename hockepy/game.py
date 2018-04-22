@@ -32,8 +32,7 @@ Game = namedtuple(
      'away_score',  # away team's score
      'time',        # UTC time and date (datetime object)
      'type',        # GameType instance
-     'status'       # GameStatus instance
-    ])
+     'status'])     # GameStatus instance
 
 
 def has_started(game):
