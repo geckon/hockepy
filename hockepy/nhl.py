@@ -35,7 +35,8 @@ from hockepy.game import Game, GameStatus, GameType
 # URL to the NHL API
 API_URL = 'https://statsapi.web.nhl.com/api/v1/'
 
-# schedule API point
+# API points
+FEED_URL = urljoin(API_URL, 'game/')
 SCHEDULE_URL = urljoin(API_URL, 'schedule')
 
 # Date/time used by the API
@@ -97,7 +98,8 @@ def parse_schedule(schedule):
                 away_score=game['teams']['away']['score'],
                 time=gametime,
                 type=get_type(game['gameType']),
-                status=get_status(game['status']['statusCode'])))
+                status=get_status(game['status']['statusCode']),
+                last_play=get_play_tuple(get_last_play(game['gamePk']))))
         sched[day['date']] = games
         logging.debug("Schedule found: %s", sched)
     return sched
@@ -138,3 +140,41 @@ def get_schedule(start_date, end_date):
         response.raise_for_status()
 
     return parse_schedule(response.json())
+
+def get_plays(game_id):
+    """Retrieve all plays as provided in the live feed.
+
+    Return list of all plays available in the feed in the format
+    provided by the NHL API.
+    """
+    logging.info('Retrieving NHL game live feed plays for %s.', game_id)
+    url = urljoin(FEED_URL, '{id}/feed/live'.format(id=game_id))
+    response = requests.get(url)
+    if response.status_code != requests.codes['ok']:
+        log_bad_response_msg(response)
+        response.raise_for_status()
+
+    return response.json()['liveData']['plays']['allPlays']
+
+def get_play_tuple(play):
+    """Get a play tuple from a play returned by the NHL API or None.
+
+    Return a (time, description) tuple for the given play and ignore
+    other information about the play provided by the NHL API.
+    Return None if the given play is empty or not valid.
+    """
+    if not play:
+        return None
+    mins, secs = [int(num) for num in play['about']['periodTime'].split(':')]
+    mins = mins + 20 * play['about']['period']
+    time = '{mm}:{ss}'.format(mm=mins, ss=secs)
+    return (time, play['result']['description'])
+
+def get_last_play(game_id):
+    """Return the last play (for the given game) in the tuple format.
+
+    The tuple format is usually a (time, description) tuple or None."""
+    plays = get_plays(game_id)
+    if plays:
+        return plays[-1]
+    return None
