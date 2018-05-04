@@ -49,10 +49,16 @@ class GameStatus(Enum):
     LIVE = 2
     FINAL = 3
 
+    def __str__(self):
+        return self.name.lower()
+
 
 @unique
 class GameType(Enum):
     """Game type enum."""
-    PRESEASON = 1
-    REGULAR = 2
-    PLAYOFFS = 3
+    PRESEASON = (1, "PR")
+    REGULAR = (2, "R")
+    PLAYOFFS = (3, "PO")
+
+    def __str__(self):
+        return self.value[1]
