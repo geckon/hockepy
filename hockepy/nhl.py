@@ -30,7 +30,7 @@ from urllib.parse import urljoin
 
 import requests
 
-from hockepy.game import Game, GameStatus, GameType
+from hockepy.game import Game, GameStatus, GameType, Play
 
 # URL to the NHL API
 API_URL = 'https://statsapi.web.nhl.com/api/v1/'
@@ -159,16 +159,26 @@ def get_plays(game_id):
 def get_play_tuple(play):
     """Get a play tuple from a play returned by the NHL API or None.
 
-    Return a (time, description) tuple for the given play and ignore
-    other information about the play provided by the NHL API.
+    Return a Play namedtuple for the given play and ignore other
+    information about the play provided by the NHL API.
     Return None if the given play is empty or not valid.
     """
     if not play:
         return None
+
+    period = play['about']['ordinalNum']
+
     mins, secs = [int(num) for num in play['about']['periodTime'].split(':')]
-    mins = mins + 20 * play['about']['period']
-    time = '{mm}:{ss}'.format(mm=mins, ss=secs)
-    return (time, play['result']['description'])
+    mins = mins + 20 * (play['about']['period'] - 1)
+    if period == 'SO':
+        # if the "period" is shootout, then it's clear that we're in
+        # a regular season and following after a 5 minutes long (not 20)
+        # overtime -> subtract 15 minutes from the game time
+        mins = mins - 15
+    time = '{mm:02d}:{ss:02d}'.format(mm=mins, ss=secs)
+
+    return Play(period=period, time=time,
+                description=play['result']['description'])
 
 def get_last_play(game_id):
     """Return the last play (for the given game) in the tuple format.

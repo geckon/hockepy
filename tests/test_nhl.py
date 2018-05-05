@@ -40,7 +40,7 @@ class TestNhl(unittest.TestCase):
                  time=datetime.strptime('2014-01-01T18:00:00+0000', TIME_FMT),
                  type=GameType.REGULAR,
                  status=GameStatus.FINAL,
-                 last_play=('80:00', 'Game End')),
+                 last_play=('SO', '65:00', 'Game End')),
             Game(home='Vancouver Canucks',
                  away='Tampa Bay Lightning',
                  home_score=2,
@@ -48,7 +48,7 @@ class TestNhl(unittest.TestCase):
                  time=datetime.strptime('2014-01-02T03:00:00+0000', TIME_FMT),
                  type=GameType.REGULAR,
                  status=GameStatus.FINAL,
-                 last_play=('60:00', 'Game End')),
+                 last_play=('3rd', '60:00', 'Game End')),
         ]},
         '2016-06-01': {'2016-06-01': [
             Game(home='Pittsburgh Penguins',
@@ -58,7 +58,7 @@ class TestNhl(unittest.TestCase):
                  time=datetime.strptime('2016-06-02T00:00:00+0000', TIME_FMT),
                  type=GameType.PLAYOFFS,
                  status=GameStatus.FINAL,
-                 last_play=('62:35', 'Game End')),
+                 last_play=('OT', '62:35', 'Game End')),
         ]},
         '2016-07-01': None,
         '2017-02-05': {'2017-02-05': [
@@ -69,7 +69,7 @@ class TestNhl(unittest.TestCase):
                  time=datetime.strptime('2017-02-05T19:00:00+0000', TIME_FMT),
                  type=GameType.REGULAR,
                  status=GameStatus.FINAL,
-                 last_play=('60:00', 'Game End')),
+                 last_play=('3rd', '60:00', 'Game End')),
             Game(home='Montréal Canadiens',
                  away='Edmonton Oilers',
                  home_score=0,
@@ -77,7 +77,7 @@ class TestNhl(unittest.TestCase):
                  time=datetime.strptime('2017-02-05T18:00:00+0000', TIME_FMT),
                  type=GameType.REGULAR,
                  status=GameStatus.FINAL,
-                 last_play=('80:00', 'Game Official')),
+                 last_play=('SO', '65:00', 'Game Official')),
             Game(home='Washington Capitals',
                  away='Los Angeles Kings',
                  home_score=5,
@@ -85,7 +85,7 @@ class TestNhl(unittest.TestCase):
                  time=datetime.strptime('2017-02-05T17:00:00+0000', TIME_FMT),
                  type=GameType.REGULAR,
                  status=GameStatus.FINAL,
-                 last_play=('60:00', 'Game End')),
+                 last_play=('3rd', '60:00', 'Game End')),
         ]}
     }
 
