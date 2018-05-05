@@ -99,7 +99,7 @@ def parse_schedule(schedule):
                 time=gametime,
                 type=get_type(game['gameType']),
                 status=get_status(game['status']['statusCode']),
-                last_play=get_play_tuple(get_last_play(game['gamePk']))))
+                last_play=get_play_tuple(get_last_play(game['gamePk'], False))))
         sched[day['date']] = games
         logging.debug("Schedule found: %s", sched)
     return sched
@@ -141,18 +141,23 @@ def get_schedule(start_date, end_date):
 
     return parse_schedule(response.json())
 
-def get_plays(game_id):
+def get_plays(game_id, fail=True):
     """Retrieve all plays as provided in the live feed.
 
     Return list of all plays available in the feed in the format
     provided by the NHL API.
+    If it's not possible to retrieve the feed for the given game_id,
+    then it depends on fail parameter - if it's True, an exception will
+    be raised, otherwise None is returned without an exception.
     """
     logging.info('Retrieving NHL game live feed plays for %s.', game_id)
     url = urljoin(FEED_URL, '{id}/feed/live'.format(id=game_id))
     response = requests.get(url)
     if response.status_code != requests.codes['ok']:
         log_bad_response_msg(response)
-        response.raise_for_status()
+        if fail:
+            response.raise_for_status()
+        return None
 
     return response.json()['liveData']['plays']['allPlays']
 
@@ -180,11 +185,15 @@ def get_play_tuple(play):
     return Play(period=period, time=time,
                 description=play['result']['description'])
 
-def get_last_play(game_id):
+def get_last_play(game_id, fail=True):
     """Return the last play (for the given game) in the tuple format.
 
-    The tuple format is usually a (time, description) tuple or None."""
-    plays = get_plays(game_id)
+    The tuple format is usually a (time, description) tuple or None.
+    If it's not possible to retrieve the feed for the given game_id,
+    then it depends on fail parameter - if it's True, an exception will
+    be raised, otherwise None is returned without an exception.
+    """
+    plays = get_plays(game_id, fail)
     if plays:
         return plays[-1]
     return None
