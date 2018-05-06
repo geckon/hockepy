@@ -24,7 +24,7 @@ import sys
 
 from hockepy import nhl
 from hockepy.commands import BaseCommand
-from hockepy.game import has_started
+from hockepy.game import has_started, GameStatus
 from hockepy.utils import local_timezone
 
 
@@ -92,9 +92,14 @@ class Schedule(BaseCommand):
         else:
             score = '   '
 
+        last_play = ''
+        if game.status == GameStatus.LIVE and game.last_play:
+            last_play = '- {desc} ({time})'.format(desc=game.last_play[1],
+                                                   time=game.last_play[0])
+
         status = '({})'.format(game.status)
 
-        print(' '.join((gametype, teams, time, score, status)))
+        print(' '.join((gametype, teams, time, score, status, last_play)))
 
     def run(self):
         """Run the command."""
