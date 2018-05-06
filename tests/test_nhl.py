@@ -21,7 +21,7 @@ from datetime import datetime
 import requests
 
 from hockepy import nhl
-from hockepy.game import Game, GameStatus, GameType
+from hockepy.game import Game, GameStatus, GameType, Play
 
 
 class TestNhl(unittest.TestCase):
@@ -159,6 +159,168 @@ class TestNhl(unittest.TestCase):
         ('2016-07-01', '2016-07-31')
         }
 
+    # the "no-goal" final PO game's ID (Dallas Stars @ Buffalo Sabres in 1999)
+    NO_GOAL_GAME_ID = 1998030416
+
+    NO_GOAL_PLAY_ITSELF = {
+        'players': [{
+            'player': {
+                'id': 8448091,
+                'fullName': 'Brett Hull',
+                'link': '/api/v1/people/8448091'
+            },
+            'seasonTotal': 8,
+            'playerType': 'Scorer'
+        }, {
+            'player': {
+                'id': 8459024,
+                'fullName': 'Jere Lehtinen',
+                'link': '/api/v1/people/8459024'
+            },
+            'seasonTotal': 3,
+            'playerType': 'Assist'
+        }, {
+            'player': {
+                'id': 8449645,
+                'fullName': 'Mike Modano',
+                'link': '/api/v1/people/8449645'
+            },
+            'seasonTotal': 18,
+            'playerType': 'Assist'
+        }, {
+            'player': {
+                'id': 8447687,
+                'fullName': 'Dominik Hasek',
+                'link': '/api/v1/people/8447687'
+            },
+            'playerType': 'Goalie'
+        }],
+        'coordinates': {},
+        'result': {
+            'strength': {
+                'name': 'Even',
+                'code': 'EVEN'
+            },
+            'eventCode': 'BUF6891',
+            'gameWinningGoal': True,
+            'description': 'Brett Hull (8) Wrist Shot, assists: Jere Lehtinen (3), Mike Modano (18)',
+            'event': 'Goal',
+            'emptyNet': False,
+            'eventTypeId': 'GOAL'
+        },
+        'about': {
+            'eventId': 6891,
+            'periodTime': '14:51',
+            'periodTimeRemaining': '',
+            'dateTime': '1999-06-20T00:00:00Z',
+            'period': 6,
+            'periodType': 'OVERTIME',
+            'ordinalNum': '3OT',
+            'goals': {
+                'away': 2,
+                'home': 1
+            },
+            'eventIdx': 2
+        },
+        'team': {
+            'id': 25,
+            'link': '/api/v1/teams/25',
+            'name': 'Dallas Stars',
+            'triCode': 'DAL'
+        }
+    }
+
+    NO_GOAL_PLAYS_ALL = [
+        Play(period='1st',
+             time='08:09',
+             description='Jere Lehtinen (10) Wrist Shot, assists: Mike Modano (17), Craig Ludwig (4)'),
+        Play(period='2nd',
+             time='25:19',
+             description='Geoff Sanderson Interference against Derian Hatcher'),
+        Play(period='2nd',
+             time='30:49',
+             description='Craig Ludwig Interference against Curtis Brown'),
+        Play(period='2nd',
+             time='34:28',
+             description='Benoit Hogue Tripping against Alexei Zhitnik'),
+        Play(period='2nd',
+             time='38:21',
+             description='Stu Barnes (7) Slap Shot, assists: Wayne Primeau (4), Alexei Zhitnik (11)'),
+        Play(period='2nd',
+             time='39:27',
+             description='Michael Peca Slashing against Richard Matvichuk'),
+        Play(period='3OT',
+             time='114:51',
+             description='Brett Hull (8) Wrist Shot, assists: Jere Lehtinen (3), Mike Modano (18)')
+    ]
+
+    MOCK_PLAYS = [
+        Play(period='1st',
+             time='00:00',
+             description='Game Scheduled'),
+        Play(period='1st',
+             time='00:00',
+             description='Period Ready'),
+        Play(period='1st',
+             time='00:00',
+             description='Period Start'),
+        Play(period='1st',
+             time='00:00',
+             description='Harry Potter faceoff won against Frodo Baggins'),
+        Play(period='1st',
+             time='00:12',
+             description='Takeaway by Albus Dumbledore'),
+        Play(period='1st',
+             time='00:21',
+             description='Albus Dumbledore - Wide of Net'),
+        Play(period='1st',
+             time='00:30',
+             description='Ginny Weasley blocked shot from Samwise Gamgee'),
+        Play(period='1st',
+             time='00:31',
+             description='Puck in Netting'),
+        Play(period='1st',
+             time='00:35',
+             description='Bilbo Baggins hit Neville Longbottom'),
+        Play(period='1st',
+             time='01:09',
+             description='Bilbo Baggins Wrist Shot saved by Oliver Wood'),
+        Play(period='1st',
+             time='01:27',
+             description='Giveaway by Peregrin Took'),
+        Play(period='1st',
+             time='01:56',
+             description='Goalie Stopped'),
+        Play(period='1st',
+             time='02:23',
+             description='Luna Lovegood (2) Slap Shot, assists: Minerva McGonagall (3), Ginny Weasley (4)'),
+        Play(period='1st',
+             time='07:15',
+             description='Meriadoc Brandybuck Holding against Rubeus Hagrid'),
+        Play(period='1st',
+             time='07:15',
+             description='TV timeout'),
+        Play(period='1st',
+             time='15:44',
+             description='Offside'),
+        Play(period='1st',
+             time='20:00',
+             description='End of 1st Period'),
+        Play(period='1st',
+             time='20:00',
+             description='Period Official'),
+        Play(period='2nd',
+             time='20:23',
+             description='Icing'),
+        Play(period='2nd',
+             time='26:09',
+             description='Referee or Linesman'),
+        Play(period='3rd',
+             time='60:00',
+             description='Game End'),
+    ]
+
+
     def test01_get_schedule_known_dates(self):
         """Test that schedule can be retrieved and parsed correctly.
 
@@ -211,3 +373,34 @@ class TestNhl(unittest.TestCase):
         with open(sched_path) as schedule_file:
             schedule = nhl.parse_schedule(json.loads(schedule_file.read()))
         self.assertEqual(schedule, None)
+
+    def test06_get_last_play_no_goal(self):
+        """Test that get_last_play() returns "No Goal" correctly."""
+        play = nhl.get_last_play(self.NO_GOAL_GAME_ID)
+        self.assertEqual(self.NO_GOAL_PLAY_ITSELF, play)
+
+    def test07_get_plays(self):
+        """Test that all events in the No Goal game parse correctly."""
+        plays = nhl.get_plays(self.NO_GOAL_GAME_ID)
+        self.assertEqual(7, len(plays))
+        for play in plays:
+            self.assertIn(nhl.get_play_tuple(play), self.NO_GOAL_PLAYS_ALL)
+
+    def test08_get_play_tuple_no_goal(self):
+        """Test that the no goal play is simplified correctly."""
+        expected = Play(period='3OT',
+                        time='114:51',
+                        description='Brett Hull (8) Wrist Shot, assists: Jere Lehtinen (3), Mike Modano (18)')
+        play = nhl.get_play_tuple(self.NO_GOAL_PLAY_ITSELF)
+        self.assertEqual(expected, play)
+
+    def test09_get_play_tuple_mock(self):
+        """Test that mock plays are simplified correctly."""
+        path = os.path.join(self.TEST_DATA, 'nhl_mock_plays.json')
+        with open(path) as plays_file:
+            plays = json.loads(plays_file.read())['plays']
+
+        self.assertEqual(len(self.MOCK_PLAYS), len(plays))
+        for play in plays:
+            play_idx = play['about']['eventIdx']
+            self.assertEqual(nhl.get_play_tuple(play), self.MOCK_PLAYS[play_idx])
