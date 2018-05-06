@@ -91,15 +91,21 @@ def parse_schedule(schedule):
             # set timezone (NHL API uses UTC)
             gametime = gametime.replace(tzinfo=timezone.utc)
 
-            games.append(Game(
-                home=game['teams']['home']['team']['name'],
-                away=game['teams']['away']['team']['name'],
-                home_score=game['teams']['home']['score'],
-                away_score=game['teams']['away']['score'],
-                time=gametime,
-                type=get_type(game['gameType']),
-                status=get_status(game['status']['statusCode']),
-                last_play=get_play_tuple(get_last_play(game['gamePk'], False))))
+            # retrieve last play
+            lastplay = get_last_play(game['gamePk'], False)
+
+            games.append(
+                Game(
+                    home=game['teams']['home']['team']['name'],
+                    away=game['teams']['away']['team']['name'],
+                    home_score=game['teams']['home']['score'],
+                    away_score=game['teams']['away']['score'],
+                    time=gametime,
+                    type=get_type(game['gameType']),
+                    status=get_status(game['status']['statusCode']),
+                    last_play=get_play_tuple(lastplay)
+                )
+            )
         sched[day['date']] = games
         logging.debug("Schedule found: %s", sched)
     return sched
@@ -141,6 +147,7 @@ def get_schedule(start_date, end_date):
 
     return parse_schedule(response.json())
 
+
 def get_plays(game_id, fail=True):
     """Retrieve all plays as provided in the live feed.
 
@@ -160,6 +167,7 @@ def get_plays(game_id, fail=True):
         return None
 
     return response.json()['liveData']['plays']['allPlays']
+
 
 def get_play_tuple(play):
     """Get a play tuple from a play returned by the NHL API or None.
@@ -184,6 +192,7 @@ def get_play_tuple(play):
 
     return Play(period=period, time=time,
                 description=play['result']['description'])
+
 
 def get_last_play(game_id, fail=True):
     """Return the last play (for the given game) in the tuple format.

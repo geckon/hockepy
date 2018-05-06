@@ -24,6 +24,7 @@ These interfaces are implemented:
 from collections import namedtuple
 from enum import Enum, unique
 
+
 Game = namedtuple(
     'Game',
     ['home',        # home team's name
@@ -36,12 +37,14 @@ Game = namedtuple(
      'last_play']   # last play so far - (time, description) tuple or None
 )
 
+
 Play = namedtuple(
     'Play',
     ['period',      # displayable - e,g. '1st', '3rd', '3OT', 'SO',...
      'time',        # game time elapsed since the starts of the game
      'description']
 )
+
 
 def has_started(game):
     """Return true if the given game has started, False otherwise.

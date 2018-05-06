@@ -203,7 +203,8 @@ class TestNhl(unittest.TestCase):
             },
             'eventCode': 'BUF6891',
             'gameWinningGoal': True,
-            'description': 'Brett Hull (8) Wrist Shot, assists: Jere Lehtinen (3), Mike Modano (18)',
+            'description': 'Brett Hull (8) Wrist Shot, assists: Jere Lehtinen '
+                           '(3), Mike Modano (18)',
             'event': 'Goal',
             'emptyNet': False,
             'eventTypeId': 'GOAL'
@@ -233,10 +234,12 @@ class TestNhl(unittest.TestCase):
     NO_GOAL_PLAYS_ALL = [
         Play(period='1st',
              time='08:09',
-             description='Jere Lehtinen (10) Wrist Shot, assists: Mike Modano (17), Craig Ludwig (4)'),
+             description='Jere Lehtinen (10) Wrist Shot, assists: Mike Modano '
+                         '(17), Craig Ludwig (4)'),
         Play(period='2nd',
              time='25:19',
-             description='Geoff Sanderson Interference against Derian Hatcher'),
+             description='Geoff Sanderson Interference against Derian '
+                         'Hatcher'),
         Play(period='2nd',
              time='30:49',
              description='Craig Ludwig Interference against Curtis Brown'),
@@ -245,13 +248,15 @@ class TestNhl(unittest.TestCase):
              description='Benoit Hogue Tripping against Alexei Zhitnik'),
         Play(period='2nd',
              time='38:21',
-             description='Stu Barnes (7) Slap Shot, assists: Wayne Primeau (4), Alexei Zhitnik (11)'),
+             description='Stu Barnes (7) Slap Shot, assists: Wayne Primeau (4)'
+                         ', Alexei Zhitnik (11)'),
         Play(period='2nd',
              time='39:27',
              description='Michael Peca Slashing against Richard Matvichuk'),
         Play(period='3OT',
              time='114:51',
-             description='Brett Hull (8) Wrist Shot, assists: Jere Lehtinen (3), Mike Modano (18)')
+             description='Brett Hull (8) Wrist Shot, assists: Jere Lehtinen '
+                         '(3), Mike Modano (18)')
     ]
 
     MOCK_PLAYS = [
@@ -293,7 +298,8 @@ class TestNhl(unittest.TestCase):
              description='Goalie Stopped'),
         Play(period='1st',
              time='02:23',
-             description='Luna Lovegood (2) Slap Shot, assists: Minerva McGonagall (3), Ginny Weasley (4)'),
+             description='Luna Lovegood (2) Slap Shot, assists: Minerva '
+                         'McGonagall (3), Ginny Weasley (4)'),
         Play(period='1st',
              time='07:15',
              description='Meriadoc Brandybuck Holding against Rubeus Hagrid'),
@@ -319,7 +325,6 @@ class TestNhl(unittest.TestCase):
              time='60:00',
              description='Game End'),
     ]
-
 
     def test01_get_schedule_known_dates(self):
         """Test that schedule can be retrieved and parsed correctly.
@@ -390,7 +395,8 @@ class TestNhl(unittest.TestCase):
         """Test that the no goal play is simplified correctly."""
         expected = Play(period='3OT',
                         time='114:51',
-                        description='Brett Hull (8) Wrist Shot, assists: Jere Lehtinen (3), Mike Modano (18)')
+                        description='Brett Hull (8) Wrist Shot, assists: Jere '
+                                    'Lehtinen (3), Mike Modano (18)')
         play = nhl.get_play_tuple(self.NO_GOAL_PLAY_ITSELF)
         self.assertEqual(expected, play)
 
@@ -402,5 +408,5 @@ class TestNhl(unittest.TestCase):
 
         self.assertEqual(len(self.MOCK_PLAYS), len(plays))
         for play in plays:
-            play_idx = play['about']['eventIdx']
-            self.assertEqual(nhl.get_play_tuple(play), self.MOCK_PLAYS[play_idx])
+            idx = play['about']['eventIdx']
+            self.assertEqual(nhl.get_play_tuple(play), self.MOCK_PLAYS[idx])
