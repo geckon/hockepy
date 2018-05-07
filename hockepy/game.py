@@ -16,6 +16,7 @@ This module implements a league-agnostic Game representation.
 
 These interfaces are implemented:
 - Game named tuple
+- Play named tuple
 - GameStatus enum
 - GameType enum
 - has_started() - indicates whether the game has already started
@@ -34,7 +35,7 @@ Game = namedtuple(
      'time',        # UTC time and date (datetime object)
      'type',        # GameType instance
      'status',      # GameStatus instance
-     'last_play']   # last play so far - (time, description) tuple or None
+     'last_play']   # last play so far - Play namedtuple or None
 )
 
 
@@ -61,6 +62,10 @@ class GameStatus(Enum):
     FINAL = 3
 
     def __str__(self):
+        """Return printable representation of the status.
+
+        That is lower case name of the status.
+        """
         # pylint: disable=no-member
         # (pylint bug - see github issue #35)
         return self.name.lower()
@@ -74,6 +79,11 @@ class GameType(Enum):
     PLAYOFFS = (3, "PO")
 
     def __str__(self):
+        """Return printable representation of the type.
+
+        That is one or two upper case character(s) specified explicitly
+        for each type.
+        """
         # pylint: disable=unsubscriptable-object
         # (pylint bug - see github issue #35)
         return self.value[1]
