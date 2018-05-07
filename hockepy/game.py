@@ -61,6 +61,8 @@ class GameStatus(Enum):
     FINAL = 3
 
     def __str__(self):
+        # pylint: disable=no-member
+        # (pylint bug - see github issue #35)
         return self.name.lower()
 
 
@@ -72,4 +74,6 @@ class GameType(Enum):
     PLAYOFFS = (3, "PO")
 
     def __str__(self):
+        # pylint: disable=unsubscriptable-object
+        # (pylint bug - see github issue #35)
         return self.value[1]
