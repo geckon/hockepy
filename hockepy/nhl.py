@@ -218,4 +218,3 @@ def get_last_play(game_id, fail=True):
             raise e
         else:
             return None
-
