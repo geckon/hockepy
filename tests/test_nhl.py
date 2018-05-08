@@ -151,6 +151,14 @@ class TestNhl(unittest.TestCase):
                  type=GameType.PLAYOFFS,
                  status=GameStatus.SCHEDULED,
                  last_play=None),
+            Game(home='Shire Halflings',
+                 away='Springfield Electrons',
+                 home_score=0,
+                 away_score=0,
+                 time='TBD',
+                 type=GameType.PLAYOFFS,
+                 status=GameStatus.SCHEDULED,
+                 last_play=None),
         ]
     }
 

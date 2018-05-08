@@ -84,7 +84,7 @@ def parse_schedule(schedule):
 
             # try and parse time
             status_code = game['status']['statusCode']
-            if status_code == 8:
+            if status_code == '8':
                 # scheduled but time TBD
                 gametime = 'TBD'
             else:

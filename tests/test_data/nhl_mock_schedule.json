@@ -232,9 +232,9 @@
     },
     {
       "date": "2017-07-08",
-      "totalItems": 3,
+      "totalItems": 4,
       "totalEvents": 0,
-      "totalGames": 3,
+      "totalGames": 4,
       "totalMatches": 0,
       "games": [
         {
@@ -340,8 +340,8 @@
           }
         },
         {
-          "gamePk": 201707080003,
-          "link": "/api/v1/game/201707080003/feed/live",
+          "gamePk": 201707080004,
+          "link": "/api/v1/game/201707080004/feed/live",
           "gameType": "P",
           "season": "20172018",
           "gameDate": "2017-07-09T01:30:00Z",
@@ -387,7 +387,58 @@
             "link": "/api/v1/venues/null"
           },
           "content": {
-            "link": "/api/v1/game/201707080003/content"
+            "link": "/api/v1/game/201707080004/content"
+          }
+        },
+        {
+          "gamePk": 201707080004,
+          "link": "/api/v1/game/201707080004/feed/live",
+          "gameType": "P",
+          "season": "20172018",
+          "gameDate": "2017-07-09T01:00:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "8",
+            "detailedState": "Scheduled (Time TBD)",
+            "statusCode": "8",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 1,
+                "name": "Springfield Electrons",
+                "link": "/api/v1/teams/1"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 8,
+                "name": "Shire Halflings",
+                "link": "/api/v1/teams/8"
+              }
+            }
+          },
+          "venue": {
+            "name": "Bag End Place",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707080004/content"
           }
         }
       ],
