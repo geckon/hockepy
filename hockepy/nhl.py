@@ -197,7 +197,7 @@ def get_play_tuple(play):
 def get_last_play(game_id, fail=True):
     """Return the last play (for the given game) in the tuple format.
 
-    The tuple format is usually a (time, description) tuple or None.
+    The tuple format is usually a Play named tuple or None.
     If it's not possible to retrieve the feed for the given game_id,
     then it depends on fail parameter - if it's True, an exception will
     be raised, otherwise None is returned without an exception.
@@ -211,4 +211,11 @@ def get_last_play(game_id, fail=True):
             response.raise_for_status()
         return None
 
-    return response.json()['liveData']['plays']['currentPlay']
+    try:
+        return response.json()['liveData']['plays']['currentPlay']
+    except KeyError as e:
+        if fail:
+            raise e
+        else:
+            return None
+
