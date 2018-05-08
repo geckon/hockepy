@@ -68,6 +68,8 @@ class Schedule(BaseCommand):
         the game time's time zone.
         Print each game on one line.
         """
+        logging.debug('Printing game {}'.format(game))
+
         gametype = '{:<2}'.format(game.type)
 
         if self.args.home_first:
@@ -94,8 +96,8 @@ class Schedule(BaseCommand):
 
         last_play = ''
         if game.status == GameStatus.LIVE and game.last_play:
-            last_play = '- {desc} ({time})'.format(desc=game.last_play[1],
-                                                   time=game.last_play[0])
+            last_play = '- {desc} ({time})'.format(
+                desc=game.last_play.description, time=game.last_play.time)
 
         status = '({})'.format(game.status)
 

@@ -202,7 +202,13 @@ def get_last_play(game_id, fail=True):
     then it depends on fail parameter - if it's True, an exception will
     be raised, otherwise None is returned without an exception.
     """
-    plays = get_plays(game_id, fail)
-    if plays:
-        return plays[-1]
-    return None
+    logging.info('Retrieving NHL game last play for %s.', game_id)
+    url = urljoin(FEED_URL, '{id}/feed/live'.format(id=game_id))
+    response = requests.get(url)
+    if response.status_code != requests.codes['ok']:
+        log_bad_response_msg(response)
+        if fail:
+            response.raise_for_status()
+        return None
+
+    return response.json()['liveData']['plays']['currentPlay']
