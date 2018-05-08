@@ -81,15 +81,21 @@ def parse_schedule(schedule):
     for day in schedule['dates']:
         games = []
         for game in day['games']:
-            # try and parse time
-            try:
-                gametime = datetime.strptime(game['gameDate'], DATETIME_FMT)
-            except ValueError as err:
-                logging.debug('Unable to parse time: %s', err)
-                gametime = None
 
-            # set timezone (NHL API uses UTC)
-            gametime = gametime.replace(tzinfo=timezone.utc)
+            # try and parse time
+            status_code = game['status']['statusCode']
+            if status_code == 8:
+                # scheduled but time TBD
+                gametime = 'TBD'
+            else:
+                try:
+                    gametime = datetime.strptime(game['gameDate'],
+                                                 DATETIME_FMT)
+                    # set timezone (NHL API uses UTC)
+                    gametime = gametime.replace(tzinfo=timezone.utc)
+                except ValueError as err:
+                    logging.debug('Unable to parse time: %s', err)
+                    gametime = None
 
             # retrieve last play
             lastplay = get_last_play(game['gamePk'], False)
@@ -102,7 +108,7 @@ def parse_schedule(schedule):
                     away_score=game['teams']['away']['score'],
                     time=gametime,
                     type=get_type(game['gameType']),
-                    status=get_status(game['status']['statusCode']),
+                    status=get_status(status_code),
                     last_play=get_play_tuple(lastplay)
                 )
             )
@@ -113,7 +119,7 @@ def parse_schedule(schedule):
 
 def get_status(status_code):
     """Return GameStatus for the given NHL API's statusCode."""
-    if status_code in ('1', '2'):
+    if status_code in ('1', '2', '8'):
         return GameStatus.SCHEDULED
     if status_code in ('3', '4'):
         return GameStatus.LIVE
