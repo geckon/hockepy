@@ -219,8 +219,8 @@ def get_last_play(game_id, fail=True):
 
     try:
         return response.json()['liveData']['plays']['currentPlay']
-    except KeyError as e:
+    except KeyError as err:
         if fail:
-            raise e
+            raise err
         else:
             return None

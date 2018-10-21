@@ -68,7 +68,7 @@ class Schedule(BaseCommand):
         the game time's time zone.
         Print each game on one line.
         """
-        logging.debug('Printing game {}'.format(game))
+        logging.debug('Printing game %s', game)
 
         gametype = '{:<2}'.format(game.type)
 
