@@ -5,8 +5,12 @@ python:
   - "3.5-dev"  # 3.5 development branch
   - "3.6"
   - "3.6-dev"  # 3.6 development branch
-  - "3.7"
   - "3.7-dev"  # 3.7 development branch
+  # 3.7 requires "xenial", doesn't work with "trusty"
+  # see https://github.com/travis-ci/travis-ci/issues/9815
+  - "3.7"
+    dist: xenial
+    sudo: true
 
 # command to install dependencies
 install:
