@@ -7,10 +7,9 @@
 
 _(pronounced like hockey-py so probably something like_ /ˈhɑː.kipaɪ/_)_
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/88be5e28d236447b892bd9e6525bbff8)](https://app.codacy.com/app/geckon/hockepy?utm_source=github.com&utm_medium=referral&utm_content=geckon/hockepy&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/geckon/hockepy.svg?branch=master)](https://travis-ci.org/geckon/hockepy)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/88be5e28d236447b892bd9e6525bbff8)](https://app.codacy.com/app/geckon/hockepy?utm_source=github.com&utm_medium=referral&utm_content=geckon/hockepy&utm_campaign=Badge_Grade_Dashboard)
 [![Updates](https://pyup.io/repos/github/geckon/hockepy/shield.svg)](https://pyup.io/repos/github/geckon/hockepy/)
-
 
 **Important:** Please keep in mind that `hockepy` is under active development
 and any part can be changed anytime.
