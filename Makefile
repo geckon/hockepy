@@ -9,6 +9,9 @@
 init:
 	pip install -r requirements.txt
 
+bandit:
+	bandit -r hocke.py hockepy tests
+
 pycodestyle:
 	pycodestyle --exclude=venv --filename="*.py" .
 
