@@ -21,10 +21,7 @@ install:
 
 # command to run tests
 script:
-  - make bandit
-  - make test
-  - make pycodestyle
-  - make pylint-error
+  - make travis
 
 notifications:
   email:

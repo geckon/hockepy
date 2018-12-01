@@ -23,3 +23,6 @@ pylint-error:
 
 test:
 	python -m unittest discover -v tests
+
+travis: bandit pycodestyle pylint-error test
+
