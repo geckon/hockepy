@@ -215,7 +215,7 @@ class TestNhl(unittest.TestCase):
                            '(3), Mike Modano (18)',
             'event': 'Goal',
             'emptyNet': False,
-            'eventTypeId': 'GOAL'
+            'eventTypeId': 'gamecenterGoal'
         },
         'about': {
             'eventId': 6891,
