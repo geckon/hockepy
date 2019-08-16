@@ -493,7 +493,7 @@
       "result":{
         "event":"Goal",
         "eventCode":"SHR22",
-        "eventTypeId":"gamecenterGoal",
+        "eventTypeId":"GOAL",
         "description":"Luna Lovegood (2) Slap Shot, assists: Minerva McGonagall (3), Ginny Weasley (4)",
         "secondaryType":"Slap Shot",
         "strength":{
