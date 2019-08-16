@@ -27,6 +27,8 @@ from hockepy.game import Game, GameStatus, GameType, Play
 class TestNhl(unittest.TestCase):
     """Tests for hockepy.nhl module."""
 
+    maxDiff = None
+
     TEST_DATA = 'tests/test_data'
 
     TIME_FMT = '%Y-%m-%dT%H:%M:%S%z'
@@ -215,7 +217,7 @@ class TestNhl(unittest.TestCase):
                            '(3), Mike Modano (18)',
             'event': 'Goal',
             'emptyNet': False,
-            'eventTypeId': 'gamecenterGoal'
+            'eventTypeId': 'GOAL'
         },
         'about': {
             'eventId': 6891,
