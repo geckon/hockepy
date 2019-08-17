@@ -23,6 +23,7 @@ import logging
 import sys
 
 from hockepy.commands import get_commands
+from hockepy.config import init_config
 from hockepy.log import init_log
 
 
@@ -63,6 +64,8 @@ def run_hockepy():
         cmd_instance.register_parser(subparsers)
 
     args = process_args(parser)
+
+    init_config()
 
     logging.debug('Discovered commands: %s', cmds.keys())
     # Initialize and run the requested command.

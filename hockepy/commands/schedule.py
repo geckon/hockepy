@@ -23,9 +23,10 @@ import logging
 import sys
 
 from hockepy import nhl
+from hockepy.config import CONF
 from hockepy.commands import BaseCommand
 from hockepy.game import has_started, GameStatus
-from hockepy.utils import local_timezone
+from hockepy.utils import bold_text, local_timezone
 
 
 class Schedule(BaseCommand):
@@ -71,6 +72,12 @@ class Schedule(BaseCommand):
         logging.debug('Printing game %s', game)
 
         gametype = '{:<2}'.format(game.type)
+
+        # highight teams
+        if game.home in CONF['highlight_teams']:
+            game = game._replace(home=bold_text(game.home))
+        if game.away in CONF['highlight_teams']:
+            game = game._replace(away=bold_text(game.away))
 
         if self.args.home_first:
             teams_fmt = '{home:>{width}} : {away:<{width}}'
