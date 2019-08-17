@@ -15,6 +15,7 @@ hockepy.utils
 This module implements various utils generally useful in hockepy.
 
 These functions are implemented:
+- bold_text() -  wraps a string with escape sequences for bold
 - datetime_to_local() - converts specified datetime object to local time
 - local_timezone() - return local time zone
 """
@@ -22,6 +23,15 @@ These functions are implemented:
 import datetime
 import logging
 import time
+
+class ESCAPE_SEQ:
+   BOLD = '\033[1m'
+   END = '\033[0m'
+
+
+def bold_text(text):
+    """Wrap a string with escape sequences for bold."""
+    return ESCAPE_SEQ.BOLD + text + ESCAPE_SEQ.END
 
 
 def datetime_to_local(dto):
