@@ -24,9 +24,10 @@ import datetime
 import logging
 import time
 
+
 class ESCAPE_SEQ:
-   BOLD = '\033[1m'
-   END = '\033[0m'
+    BOLD = '\033[1m'
+    END = '\033[0m'
 
 
 def bold_text(text):
