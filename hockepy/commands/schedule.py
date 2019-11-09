@@ -73,20 +73,26 @@ class Schedule(BaseCommand):
 
         gametype = '{:<2}'.format(game.type)
 
+        home_width = team_width
+        away_width = team_width
+
         # highight teams
+        ESCAPE_SEQ_WIDTH = 8 # width compensation for bold escape seq.
         if game.home in CONF['highlight_teams']:
             game = game._replace(home=bold_text(game.home))
+            home_width = home_width + ESCAPE_SEQ_WIDTH
         if game.away in CONF['highlight_teams']:
             game = game._replace(away=bold_text(game.away))
+            away_width = away_width + ESCAPE_SEQ_WIDTH
 
         if self.args.home_first:
-            teams_fmt = '{home:>{width}} : {away:<{width}}'
+            teams_fmt = '{home:>{home_w}} : {away:<{away_w}}'
             score_fmt = '{home}:{away}'
         else:
-            teams_fmt = '{away:>{width}} @ {home:<{width}}'
+            teams_fmt = '{away:>{away_w}} @ {home:<{home_w}}'
             score_fmt = '{away}:{home}'
-        teams = teams_fmt.format(
-            away=game.away, home=game.home, width=team_width)
+        teams = teams_fmt.format(away=game.away, home=game.home,
+                                 away_w=away_width, home_w=home_width)
 
         if timezone:
             gametime = game.time.astimezone(timezone)
