@@ -77,7 +77,7 @@ class Schedule(BaseCommand):
         away_width = team_width
 
         # highight teams
-        ESCAPE_SEQ_WIDTH = 8 # width compensation for bold escape seq.
+        ESCAPE_SEQ_WIDTH = 8  # width compensation for bold escape seq.
         if game.home in CONF['highlight_teams']:
             game = game._replace(home=bold_text(game.home))
             home_width = home_width + ESCAPE_SEQ_WIDTH
