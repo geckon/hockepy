@@ -128,7 +128,7 @@ class Schedule(BaseCommand):
         except ValueError:
             print('ERROR: Dates must be in "{}" format.'.format(self.DATE_FMT),
                   file=sys.stderr)
-            exit(1)
+            sys.exit(1)
 
         # Should local time be considered or UTC?
         if self.args.utc:

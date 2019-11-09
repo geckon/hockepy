@@ -222,5 +222,4 @@ def get_last_play(game_id, fail=True):
     except KeyError as err:
         if fail:
             raise err
-        else:
-            return None
+        return None

@@ -34,6 +34,5 @@ def get_commands():
     if _CMDS_CACHE is not None:
         return _CMDS_CACHE
 
-    commands = [cmd for cmd in BaseCommand.__subclasses__()]
-    _CMDS_CACHE = {cmd.command: cmd for cmd in commands}
+    _CMDS_CACHE = {cmd.command: cmd for cmd in BaseCommand.__subclasses__()}
     return _CMDS_CACHE
