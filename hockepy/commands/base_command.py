@@ -18,8 +18,6 @@ for convenience - it adds 'command' class property.
 """
 
 import abc
-import logging
-import sys
 
 
 class BaseCommandMeta(abc.ABCMeta):
