@@ -43,14 +43,14 @@ def datetime_to_local(dto):
 
 
 def exit_error(msg):
-        """Exit with an error message.
+    """Exit with an error message.
 
-        This should be called in case of a failure that is supposed to
-        lead to the program's exit.
-        """
-        logging.error(msg)
-        logging.info('Exiting...')
-        sys.exit(1)
+    This should be called in case of a failure that is supposed to
+    lead to the program's exit.
+    """
+    logging.error(msg)
+    logging.info('Exiting...')
+    sys.exit(1)
 
 
 def local_timezone():
