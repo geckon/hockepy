@@ -17,12 +17,14 @@ This module implements various utils generally useful in hockepy.
 These functions are implemented:
 - bold_text() -  wraps a string with escape sequences for bold
 - datetime_to_local() - converts specified datetime object to local time
+- exit_error() - exit with an error
 - local_timezone() - return local time zone
 """
 
 import datetime
 import logging
 import time
+import sys
 
 
 class ESCAPE_SEQ:
@@ -38,6 +40,17 @@ def bold_text(text):
 def datetime_to_local(dto):
     """Convert the given datetime object to the local time zone."""
     return dto.astimezone(local_timezone())
+
+
+def exit_error(msg):
+    """Exit with an error message.
+
+    This should be called in case of a failure that is supposed to
+    lead to the program's exit.
+    """
+    logging.error(msg)
+    logging.info('Exiting...')
+    sys.exit(1)
 
 
 def local_timezone():

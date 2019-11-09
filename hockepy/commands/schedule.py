@@ -20,13 +20,12 @@ games scheduled for the given date (default is today).
 
 import datetime
 import logging
-import sys
 
 from hockepy import nhl
 from hockepy.config import CONF
 from hockepy.commands import BaseCommand
 from hockepy.game import has_started, GameStatus
-from hockepy.utils import bold_text, local_timezone
+from hockepy.utils import bold_text, exit_error, local_timezone
 
 
 class Schedule(BaseCommand):
@@ -132,9 +131,7 @@ class Schedule(BaseCommand):
             datetime.datetime.strptime(self.args.first_date, self.DATE_FMT)
             datetime.datetime.strptime(self.args.last_date, self.DATE_FMT)
         except ValueError:
-            print('ERROR: Dates must be in "{}" format.'.format(self.DATE_FMT),
-                  file=sys.stderr)
-            sys.exit(1)
+            exit_error('Dates must be in "{}" format.'.format(self.DATE_FMT))
 
         # Should local time be considered or UTC?
         if self.args.utc:

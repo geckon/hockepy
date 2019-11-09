@@ -32,29 +32,14 @@ def init_log(level=logging.WARNING):
     if not logger.handlers:
         logger.addHandler(logging.StreamHandler())
 
+    # format is different for debugging
+    if level == logging.DEBUG:
+        formatter = logging.Formatter(
+            '%(levelname)-7s: %(asctime)s : %(module)-14s: %(message)s',
+            '%d-%b-%y %H:%M:%S')
+    else:
+        formatter = logging.Formatter('%(levelname)s: %(message)s')
+
     # set formatting for all handlers
-    formatter = HockepyFormatter()
     for handler in logger.handlers:
         handler.setFormatter(formatter)
-
-
-class HockepyFormatter(logging.Formatter):
-    """Default formatter for hockepy.
-
-    Allows setting different format for each log level which is
-    accomplished by keeping multiple formatters internally and calling
-    the right one for each log record.
-    """
-
-    FORMATTERS = {
-        logging.INFO: logging.Formatter(
-            fmt='%(levelname)s: %(message)s'),
-        'DEFAULT': logging.Formatter(
-            fmt='%(levelname)-7s: %(module)-14s: %(message)s')
-        }
-
-    def format(self, record):
-        """Format the given record according to its log level."""
-        formatter = self.FORMATTERS.get(
-            record.levelno, self.FORMATTERS['DEFAULT'])
-        return formatter.format(record)
