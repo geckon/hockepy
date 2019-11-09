@@ -18,6 +18,8 @@ for convenience - it adds 'command' class property.
 """
 
 import abc
+import logging
+import sys
 
 
 class BaseCommandMeta(abc.ABCMeta):
@@ -86,3 +88,13 @@ class BaseCommand(metaclass=BaseCommandMeta):
     @abc.abstractmethod
     def run(self):
         """Run the command."""
+
+    def exit_error(self, msg):
+        """Exit with an error message.
+
+        This should be called by commands in case of a failure that is
+        supposed to lead to the program's exit.
+        """
+        logging.error(msg)
+        logging.info('Exiting...')
+        sys.exit(1)
