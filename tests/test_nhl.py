@@ -314,6 +314,9 @@ class TestNhl(unittest.TestCase):
              time='07:15',
              description='Meriadoc Brandybuck Holding against Rubeus Hagrid'),
         Play(period='1st',
+             time='08:09',
+             description='Meriadoc Brandybuck Tripping against Rubeus Hagrid'),
+        Play(period='1st',
              time='07:15',
              description='TV timeout'),
         Play(period='1st',
@@ -334,6 +337,18 @@ class TestNhl(unittest.TestCase):
         Play(period='3rd',
              time='60:00',
              description='Game End'),
+        Play(period='OT',
+             time='62:46',
+             description='End of OT'),
+        Play(period='OT',
+             time='62:46',
+             description='Period Official'),
+        Play(period='OT',
+             time='62:46',
+             description='Game End'),
+        Play(period='OT',
+             time='62:46',
+             description='Game Official'),
     ]
 
     def test01_get_schedule_known_dates(self):
