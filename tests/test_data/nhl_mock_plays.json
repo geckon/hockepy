@@ -895,6 +895,235 @@
         }
       },
       "coordinates" : { }
+    },
+    {
+      "players" : [ {
+        "player" : {
+          "id" : 333,
+          "fullName" : "Malcolm Reynolds",
+          "link" : "/api/v1/people/333"
+        },
+        "playerType" : "Shooter"
+      }, {
+        "player" : {
+          "id" : 444,
+          "fullName" : "Arya Stark",
+          "link" : "/api/v1/people/444"
+        },
+        "playerType" : "Goalie"
+      } ],
+      "result" : {
+        "event" : "Shot",
+        "eventCode" : "WES659",
+        "eventTypeId" : "SHOT",
+        "description" : "Malcolm Reynolds Wrist Shot saved by Arya Stark",
+        "secondaryType" : "Wrist Shot"
+      },
+      "about" : {
+        "eventIdx" : 26,
+        "eventId" : 659,
+        "period" : 5,
+        "periodType" : "SHOOTOUT",
+        "ordinalNum" : "SO",
+        "periodTime" : "00:00",
+        "periodTimeRemaining" : "00:00",
+        "dateTime" : "2019-11-10T06:11:16Z",
+        "goals" : {
+          "away" : 1,
+          "home" : 1
+        }
+      },
+      "coordinates" : {
+        "x" : -65.0,
+        "y" : -2.0
+      },
+      "team" : {
+        "id" : 18,
+        "name" : "Serenity",
+        "link" : "/api/v1/teams/18",
+        "triCode" : "SER"
+      }
+    }, {
+      "players" : [ {
+        "player" : {
+          "id" : 888,
+          "fullName" : "Robert Baratheon",
+          "link" : "/api/v1/people/888"
+        },
+        "playerType" : "Shooter"
+      } ],
+      "result" : {
+        "event" : "Missed Shot",
+        "eventCode" : "WES660",
+        "eventTypeId" : "MISSED_SHOT",
+        "description" : "Robert Baratheon Wide of Net"
+      },
+      "about" : {
+        "eventIdx" : 27,
+        "eventId" : 660,
+        "period" : 5,
+        "periodType" : "SHOOTOUT",
+        "ordinalNum" : "SO",
+        "periodTime" : "00:00",
+        "periodTimeRemaining" : "00:00",
+        "dateTime" : "2019-11-10T06:11:53Z",
+        "goals" : {
+          "away" : 1,
+          "home" : 1
+        }
+      },
+      "coordinates" : {
+        "x" : 81.0,
+        "y" : 7.0
+      },
+      "team" : {
+        "id" : 28,
+        "name" : "Westeros",
+        "link" : "/api/v1/teams/28",
+        "triCode" : "WES"
+      }
+    },
+    {
+      "players" : [ {
+        "player" : {
+          "id" : 111,
+          "fullName" : "Theon Greyjoy",
+          "link" : "/api/v1/people/111"
+        },
+        "playerType" : "Scorer",
+        "seasonTotal" : 0
+      }, {
+        "player" : {
+          "id" : 999,
+          "fullName" : "River Tam",
+          "link" : "/api/v1/people/999"
+        },
+        "playerType" : "Goalie"
+      } ],
+      "result" : {
+        "event" : "Goal",
+        "eventCode" : "WES672",
+        "eventTypeId" : "GOAL",
+        "description" : "Theon Greyjoy - Wrist Shot",
+        "secondaryType" : "Wrist Shot",
+        "strength" : {
+          "code" : "EVEN",
+          "name" : "Even"
+        },
+        "gameWinningGoal" : false
+      },
+      "about" : {
+        "eventIdx" : 28,
+        "eventId" : 672,
+        "period" : 5,
+        "periodType" : "SHOOTOUT",
+        "ordinalNum" : "SO",
+        "periodTime" : "00:00",
+        "periodTimeRemaining" : "00:00",
+        "dateTime" : "2019-11-10T06:17:23Z",
+        "goals" : {
+          "away" : 1,
+          "home" : 1
+        }
+      },
+      "coordinates" : {
+        "x" : 72.0,
+        "y" : -5.0
+      },
+      "team" : {
+        "id" : 28,
+        "name" : "Westeros",
+        "link" : "/api/v1/teams/28",
+        "triCode" : "WES"
+      }
+    }, {
+      "result" : {
+        "event" : "Period End",
+        "eventCode" : "WES673",
+        "eventTypeId" : "PERIOD_END",
+        "description" : "End of OT"
+      },
+      "about" : {
+        "eventIdx" : 29,
+        "eventId" : 673,
+        "period" : 5,
+        "periodType" : "SHOOTOUT",
+        "ordinalNum" : "SO",
+        "periodTime" : "00:00",
+        "periodTimeRemaining" : "00:00",
+        "dateTime" : "2019-11-10T06:17:39Z",
+        "goals" : {
+          "away" : 1,
+          "home" : 1
+        }
+      },
+      "coordinates" : { }
+    }, {
+      "result" : {
+        "event" : "Period Official",
+        "eventCode" : "WES676",
+        "eventTypeId" : "PERIOD_OFFICIAL",
+        "description" : "Period Official"
+      },
+      "about" : {
+        "eventIdx" : 30,
+        "eventId" : 676,
+        "period" : 5,
+        "periodType" : "SHOOTOUT",
+        "ordinalNum" : "SO",
+        "periodTime" : "00:00",
+        "periodTimeRemaining" : "00:00",
+        "dateTime" : "2019-11-10T06:17:40Z",
+        "goals" : {
+          "away" : 1,
+          "home" : 1
+        }
+      },
+      "coordinates" : { }
+    }, {
+      "result" : {
+        "event" : "Game End",
+        "eventCode" : "WES677",
+        "eventTypeId" : "GAME_END",
+        "description" : "Game End"
+      },
+      "about" : {
+        "eventIdx" : 31,
+        "eventId" : 677,
+        "period" : 5,
+        "periodType" : "SHOOTOUT",
+        "ordinalNum" : "SO",
+        "periodTime" : "00:00",
+        "periodTimeRemaining" : "00:00",
+        "dateTime" : "2019-11-10T06:17:42Z",
+        "goals" : {
+          "away" : 1,
+          "home" : 1
+        }
+      },
+      "coordinates" : { }
+    }, {
+      "result" : {
+        "event" : "Shootout Complete",
+        "eventCode" : "WES678",
+        "eventTypeId" : "SHOOTOUT_COMPLETE",
+        "description" : "End of Shootout"
+      },
+      "about" : {
+        "eventIdx" : 32,
+        "eventId" : 678,
+        "period" : 5,
+        "periodType" : "SHOOTOUT",
+        "ordinalNum" : "SO",
+        "periodTime" : "00:00",
+        "periodTimeRemaining" : "00:00",
+        "dateTime" : "2019-11-10T06:18:00Z",
+        "goals" : {
+          "away" : 1,
+          "home" : 1
+        }
+      },
+      "coordinates" : { }
     }
   ]
 }

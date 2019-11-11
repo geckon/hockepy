@@ -349,6 +349,28 @@ class TestNhl(unittest.TestCase):
         Play(period='OT',
              time='62:46',
              description='Game Official'),
+        Play(period='SO',
+             time='65:00',
+             description='Malcolm Reynolds Wrist Shot saved by Arya Stark'),
+        Play(period='SO',
+             time='65:00',
+             description='Robert Baratheon Wide of Net'),
+        Play(period='SO',
+             time='65:00',
+             description='Theon Greyjoy - Wrist Shot'),
+        Play(period='SO',
+             time='65:00',
+             description='End of OT'),
+        Play(period='SO',
+             time='65:00',
+             description='Period Official'),
+        Play(period='SO',
+             time='65:00',
+             description='Game End'),
+        Play(period='SO',
+             time='65:00',
+             description='End of Shootout'),
+
     ]
 
     def test01_get_schedule_known_dates(self):
