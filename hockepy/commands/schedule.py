@@ -103,8 +103,12 @@ class Schedule(BaseCommand):
         if has_started(game):
             score = score_fmt.format(away=game.away_score,
                                      home=game.home_score)
+            if game.last_play.period == 'SO' or game.last_play.period == 'OT':
+                score = score + ' ' + game.last_play.period
+            else:
+                score = score + '   '
         else:
-            score = '   '
+            score = '      '
 
         last_play = ''
         if game.status == GameStatus.LIVE and game.last_play:
