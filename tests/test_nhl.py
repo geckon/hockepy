@@ -370,6 +370,15 @@ class TestNhl(unittest.TestCase):
         Play(period='SO',
              time='65:00',
              description='End of Shootout'),
+        Play(period='1st',
+             time='08:38',
+             description='Puck in Crowd'),
+        Play(period='2nd',
+             time='25:53',
+             description='Jayne Cobb Fighting against Sandor Clegane'),
+        Play(period='2nd',
+             time='25:53',
+             description='Sandor Clegane Fighting against Jayne Cobb'),
 
     ]
 

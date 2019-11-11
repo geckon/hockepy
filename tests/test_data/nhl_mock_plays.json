@@ -1124,6 +1124,129 @@
         }
       },
       "coordinates" : { }
+    },
+    {
+      "result" : {
+        "event" : "Stoppage",
+        "eventCode" : "SHR24",
+        "eventTypeId" : "STOP",
+        "description" : "Puck in Crowd"
+      },
+      "about" : {
+        "eventIdx" : 33,
+        "eventId" : 24,
+        "period" : 1,
+        "periodType" : "REGULAR",
+        "ordinalNum" : "1st",
+        "periodTime" : "08:38",
+        "periodTimeRemaining" : "11:22",
+        "dateTime" : "2019-11-11T00:21:25Z",
+        "goals" : {
+          "away" : 0,
+          "home" : 0
+        }
+      },
+      "coordinates" : { }
+    },
+    {
+      "players" : [ {
+        "player" : {
+          "id" : 123,
+          "fullName" : "Jayne Cobb",
+          "link" : "/api/v1/people/123"
+        },
+        "playerType" : "PenaltyOn"
+      }, {
+        "player" : {
+          "id" : 321,
+            "fullName" : "Sandor Clegane",
+            "link" : "/api/v1/people/321"
+        },
+        "playerType" : "DrewBy"
+      } ],
+      "result" : {
+        "event" : "Penalty",
+        "eventCode" : "WES361",
+        "eventTypeId" : "PENALTY",
+        "description" : "Jayne Cobb Fighting against Sandor Clegane",
+        "secondaryType" : "Fighting",
+        "penaltySeverity" : "Major",
+        "penaltyMinutes" : 5
+      },
+      "about" : {
+        "eventIdx" : 34,
+        "eventId" : 361,
+        "period" : 2,
+        "periodType" : "REGULAR",
+        "ordinalNum" : "2nd",
+        "periodTime" : "05:53",
+        "periodTimeRemaining" : "14:07",
+        "dateTime" : "2019-11-10T19:13:48Z",
+        "goals" : {
+          "away" : 3,
+          "home" : 3
+        }
+      },
+      "coordinates" : {
+        "x" : 95.0,
+        "y" : 18.0
+      },
+      "team" : {
+        "id" : 13,
+        "name" : "Serenity",
+        "link" : "/api/v1/teams/13",
+        "triCode" : "SER"
+      }
+    },
+    {
+      "players" : [ {
+        "player" : {
+          "id" : 321,
+          "fullName" : "Sandor Clegane",
+          "link" : "/api/v1/people/321"
+        },
+        "playerType" : "PenaltyOn"
+      }, {
+        "player" : {
+          "id" : 123,
+          "fullName" : "Jayne Cobb",
+          "link" : "/api/v1/people/123"
+        },
+        "playerType" : "DrewBy"
+      } ],
+      "result" : {
+        "event" : "Penalty",
+        "eventCode" : "WES363",
+        "eventTypeId" : "PENALTY",
+        "description" : "Sandor Clegane Fighting against Jayne Cobb",
+        "secondaryType" : "Fighting",
+        "penaltySeverity" : "Major",
+        "penaltyMinutes" : 5
+      },
+      "about" : {
+        "eventIdx" : 35,
+        "eventId" : 363,
+        "period" : 2,
+        "periodType" : "REGULAR",
+        "ordinalNum" : "2nd",
+        "periodTime" : "05:53",
+        "periodTimeRemaining" : "14:07",
+        "dateTime" : "2019-11-10T19:14:12Z",
+        "goals" : {
+          "away" : 3,
+          "home" : 3
+        }
+      },
+      "coordinates" : {
+        "x" : 96.0,
+        "y" : 19.0
+      },
+      "team" : {
+        "id" : 3,
+        "name" : "Westeros",
+        "link" : "/api/v1/teams/3",
+        "triCode" : "WES"
+      }
     }
   ]
 }
