@@ -70,7 +70,7 @@ class Schedule(BaseCommand):
         """
         logging.debug('Printing game %s', game)
 
-        gametype = f'{game.type:<2}'
+        gametype = f'{game.type:2}'
 
         home_width = team_width
         away_width = team_width
