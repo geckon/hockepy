@@ -9,6 +9,8 @@ _(pronounced like hockey-py so probably something like_ /ˈhɑː.kipaɪ/_)_
 
 [![Build Status](https://travis-ci.com/geckon/hockepy.svg?branch=master)](https://travis-ci.com/geckon/hockepy)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/88be5e28d236447b892bd9e6525bbff8)](https://app.codacy.com/app/geckon/hockepy?utm_source=github.com&utm_medium=referral&utm_content=geckon/hockepy&utm_campaign=Badge_Grade_Dashboard)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/geckon/hockepy.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/geckon/hockepy/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/geckon/hockepy.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/geckon/hockepy/context:python)
 [![Updates](https://pyup.io/repos/github/geckon/hockepy/shield.svg)](https://pyup.io/repos/github/geckon/hockepy/)
 
 **Important:** Please keep in mind that `hockepy` is under active development
