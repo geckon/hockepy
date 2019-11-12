@@ -68,9 +68,9 @@ class Schedule(BaseCommand):
         the game time's time zone.
         Print each game on one line.
         """
-        logging.debug('Printing game %s', game)
+        logging.debug(f'Printing game {game}')
 
-        gametype = '{:<2}'.format(game.type)
+        gametype = f'{game.type:<2}'
 
         home_width = team_width
         away_width = team_width
@@ -97,45 +97,45 @@ class Schedule(BaseCommand):
             gametime = game.time.astimezone(timezone)
         else:
             gametime = game.time
-        time = '{h:02d}:{m:02d} {tz}'.format(
-            h=gametime.hour, m=gametime.minute, tz=gametime.tzname())
+        time = f'{gametime.hour:02d}:{gametime.minute:02d} {gametime.tzname()}'
 
+        last_play = game.last_play
         if has_started(game):
             score = score_fmt.format(away=game.away_score,
                                      home=game.home_score)
-            if game.last_play.period == 'SO' or game.last_play.period == 'OT':
-                score = score + ' ' + game.last_play.period
+            if last_play.period == 'SO' or last_play.period == 'OT':
+                score = score + ' ' + last_play.period
             else:
                 score = score + '   '
         else:
             score = '      '
 
-        last_play = ''
-        if game.status == GameStatus.LIVE and game.last_play:
-            last_play = '- {desc} ({time})'.format(
-                desc=game.last_play.description, time=game.last_play.time)
+        last_play_txt = ''
+        if game.status == GameStatus.LIVE and last_play:
+            last_play_txt = f'- {last_play.description} ({last_play.time})'
 
-        status = '({})'.format(game.status)
+        status = f'({game.status})'
 
-        print(' '.join((gametype, teams, time, score, status, last_play)))
+        print(' '.join((gametype, teams, time, score, status, last_play_txt)))
 
     def run(self):
         """Run the command."""
-        logging.debug('Running the %r command.', self.command)
+        logging.debug(f'Running the {self.command!r} command.')
 
         # Determine the date(s) the schedule is wanted for.
         if self.args.first_date is None:
             self.args.first_date = datetime.date.today().strftime(
                 self.DATE_FMT)
-            logging.debug('Date empty -> using today (%s).',
-                          self.args.first_date)
+            logging.debug(
+                f'Date empty -> using today ({self.args.first_date}).'
+            )
         if self.args.last_date is None:
             self.args.last_date = self.args.first_date
         try:
             datetime.datetime.strptime(self.args.first_date, self.DATE_FMT)
             datetime.datetime.strptime(self.args.last_date, self.DATE_FMT)
         except ValueError:
-            exit_error('Dates must be in "{}" format.'.format(self.DATE_FMT))
+            exit_error(f'Dates must be in {self.DATE_FMT!r} format.')
 
         # Should local time be considered or UTC?
         if self.args.utc:
@@ -149,9 +149,9 @@ class Schedule(BaseCommand):
             print('No games at all.')
             return
         for date, games in schedule.items():
-            print('Schedule for {}'.format(date))
+            print(f'Schedule for {date}')
             if not games:
-                print('  No games for {}.'.format(date))
+                print(f'  No games for {date}.')
             else:
                 home_width = max([len(game.home) for game in games])
                 away_width = max([len(game.away) for game in games])
