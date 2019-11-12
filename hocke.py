@@ -35,7 +35,7 @@ def process_args(parser):
     """
     args = parser.parse_args(sys.argv[1:])
     if args.command_name is None:
-        print("Command missing. Run `{} -h' for help.".format(sys.argv[0]))
+        print(f"Command missing. Run `{sys.argv[0]} -h' for help.")
         sys.exit(1)
 
     if args.debug:

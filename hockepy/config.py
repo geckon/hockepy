@@ -63,7 +63,8 @@ def read_config_file():
         except TypeError as err:
             logging.debug('Not found.')
         except toml.TomlDecodeError:
-            logging.warning('Config file %s has a wrong format. Ingoring it.')
+            logging.warning('Config file %r has a wrong format. Ingoring it.',
+                            cf_path)
 
     logging.info('Config file not found. Default values will be used.')
     return {}

@@ -113,7 +113,7 @@ def parse_schedule(schedule):
                 )
             )
         sched[day['date']] = games
-        logging.debug("Schedule found: %s", sched)
+        logging.debug('Schedule found: %s', sched)
     return sched
 
 
@@ -144,8 +144,7 @@ def get_schedule(start_date, end_date):
     the given dates.
     """
     logging.info('Retrieving NHL schedule for %s - %s.', start_date, end_date)
-    url = '{schedule_url}?startDate={start}&endDate={end}'.format(
-        schedule_url=SCHEDULE_URL, start=start_date, end=end_date)
+    url = f'{SCHEDULE_URL}?startDate={start_date}&endDate={end_date}'
     response = requests.get(url)
     if response.status_code != requests.codes['ok']:
         log_bad_response_msg(response)
@@ -164,7 +163,7 @@ def get_plays(game_id, fail=True):
     be raised, otherwise None is returned without an exception.
     """
     logging.info('Retrieving NHL game live feed plays for %s.', game_id)
-    url = urljoin(FEED_URL, '{id}/feed/live'.format(id=game_id))
+    url = urljoin(FEED_URL, f'{game_id}/feed/live')
     response = requests.get(url)
     if response.status_code != requests.codes['ok']:
         log_bad_response_msg(response)
@@ -194,7 +193,7 @@ def get_play_tuple(play):
         # a regular season and following after a 5 minutes long (not 20)
         # overtime -> subtract 15 minutes from the game time
         mins = mins - 15
-    time = '{mm:02d}:{ss:02d}'.format(mm=mins, ss=secs)
+    time = f'{mins:02d}:{secs:02d}'
 
     return Play(period=period, time=time,
                 description=play['result']['description'])
@@ -209,7 +208,7 @@ def get_last_play(game_id, fail=True):
     be raised, otherwise None is returned without an exception.
     """
     logging.info('Retrieving NHL game last play for %s.', game_id)
-    url = urljoin(FEED_URL, '{id}/feed/live'.format(id=game_id))
+    url = urljoin(FEED_URL, f'{game_id}/feed/live')
     response = requests.get(url)
     if response.status_code != requests.codes['ok']:
         log_bad_response_msg(response)
