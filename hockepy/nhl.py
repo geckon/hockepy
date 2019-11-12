@@ -58,14 +58,11 @@ def log_bad_response_msg(response):
         json = response.json()
         msg_number = json.get('messageNumber', None)
         msg = json.get('message', None)
-        logging.debug(
-            f'Bad response from NHL API (HTTP {response.status_code}): '
-            f'#{msg_number}: {msg}'
-        )
+        logging.debug('Bad response from NHL API (HTTP %d): #%d: %s',
+                      response.status_code, msg_number, msg)
     except ValueError:
-        logging.debug(
-            f'Bad response from NHL API (HTTP {response.status_code}).'
-        )
+        logging.debug('Bad response from NHL API (HTTP %d).',
+                      response.status_code)
 
 
 def parse_schedule(schedule):
@@ -97,7 +94,7 @@ def parse_schedule(schedule):
                     # set timezone (NHL API uses UTC)
                     gametime = gametime.replace(tzinfo=timezone.utc)
                 except ValueError as err:
-                    logging.debug(f'Unable to parse time: {err}')
+                    logging.debug('Unable to parse time: %s', err)
                     gametime = None
 
             # retrieve last play
@@ -116,7 +113,7 @@ def parse_schedule(schedule):
                 )
             )
         sched[day['date']] = games
-        logging.debug(f'Schedule found: {sched}')
+        logging.debug('Schedule found: %s', sched)
     return sched
 
 
@@ -146,7 +143,7 @@ def get_schedule(start_date, end_date):
     Game named tuples. Return None if there are no games between
     the given dates.
     """
-    logging.info(f'Retrieving NHL schedule for {start_date} - {end_date}.')
+    logging.info('Retrieving NHL schedule for %s - %s.', start_date, end_date)
     url = f'{SCHEDULE_URL}?startDate={start_date}&endDate={end_date}'
     response = requests.get(url)
     if response.status_code != requests.codes['ok']:
@@ -165,7 +162,7 @@ def get_plays(game_id, fail=True):
     then it depends on fail parameter - if it's True, an exception will
     be raised, otherwise None is returned without an exception.
     """
-    logging.info(f'Retrieving NHL game live feed plays for {game_id}.')
+    logging.info('Retrieving NHL game live feed plays for %s.', game_id)
     url = urljoin(FEED_URL, f'{game_id}/feed/live')
     response = requests.get(url)
     if response.status_code != requests.codes['ok']:
@@ -210,7 +207,7 @@ def get_last_play(game_id, fail=True):
     then it depends on fail parameter - if it's True, an exception will
     be raised, otherwise None is returned without an exception.
     """
-    logging.info(f'Retrieving NHL game last play for {game_id}.')
+    logging.info('Retrieving NHL game last play for %s.', game_id)
     url = urljoin(FEED_URL, f'{game_id}/feed/live')
     response = requests.get(url)
     if response.status_code != requests.codes['ok']:

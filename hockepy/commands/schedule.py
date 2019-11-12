@@ -68,7 +68,7 @@ class Schedule(BaseCommand):
         the game time's time zone.
         Print each game on one line.
         """
-        logging.debug(f'Printing game {game}')
+        logging.debug('Printing game %s', game)
 
         gametype = f'{game.type:<2}'
 
@@ -120,15 +120,14 @@ class Schedule(BaseCommand):
 
     def run(self):
         """Run the command."""
-        logging.debug(f'Running the {self.command!r} command.')
+        logging.debug('Running the %r command.', self.command)
 
         # Determine the date(s) the schedule is wanted for.
         if self.args.first_date is None:
             self.args.first_date = datetime.date.today().strftime(
                 self.DATE_FMT)
-            logging.debug(
-                f'Date empty -> using today ({self.args.first_date}).'
-            )
+            logging.debug('Date empty -> using today (%s).',
+                          self.args.first_date)
         if self.args.last_date is None:
             self.args.last_date = self.args.first_date
         try:

@@ -49,6 +49,6 @@ class Today(BaseCommand):
 
     def run(self):
         """Run the command with the given arguments."""
-        logging.debug(f'Running the {self.command!r} command.')
+        logging.debug('Running the %r command.', self.command)
         self.args.first_date = self.args.last_date = None
         Schedule(self.args).run()

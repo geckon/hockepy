@@ -66,5 +66,5 @@ def local_timezone():
     offset = -1 * offset
 
     local_tz = datetime.timezone(datetime.timedelta(seconds=offset), tz_name)
-    logging.debug(f'Local timezone is determined to be {local_tz}.')
+    logging.debug('Local timezone is determined to be %s.', local_tz)
     return local_tz

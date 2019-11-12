@@ -53,19 +53,18 @@ def read_config_file():
     logging.debug('Looking for config file.')
     for loc, loc_desc in locations:
         try:
-            logging.debug(f'Trying {loc_desc}')
+            logging.debug('Trying %s', loc_desc)
             cf_path = os.path.join(loc, CONF_FILE_NAME)
             cf_content = toml.load(cf_path)
-            logging.info(f'Reading config file {cf_path!r}')
+            logging.info('Reading config file %r', cf_path)
             return cf_content
         except IOError as err:
-            logging.debug(f'Could not read {cf_path!r}: {err.strerror}')
+            logging.debug('Could not read %r: %s', cf_path, err.strerror)
         except TypeError as err:
             logging.debug('Not found.')
         except toml.TomlDecodeError:
-            logging.warning(
-                f'Config file {cf_path!r} has a wrong format. Ingoring it.'
-            )
+            logging.warning('Config file %r has a wrong format. Ingoring it.',
+                            cf_path)
 
     logging.info('Config file not found. Default values will be used.')
     return {}

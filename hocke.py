@@ -45,7 +45,7 @@ def process_args(parser):
     else:
         loglevel = logging.WARNING
     init_log(level=loglevel)
-    logging.debug(f'Logging level set to {loglevel}')
+    logging.debug('Logging level set to %s', loglevel)
 
     return args
 
@@ -67,7 +67,7 @@ def run_hockepy():
 
     init_config()
 
-    logging.debug(f'Discovered commands: {cmds.keys()}')
+    logging.debug('Discovered commands: %s', cmds.keys())
     # Initialize and run the requested command.
     command = cmds[args.command_name](args)
     command.run()
