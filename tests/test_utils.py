@@ -35,4 +35,3 @@ class TestUtils(unittest.TestCase):
             utils.exit_error()
             unittest.main(exit=False)
         self.assertEqual(1, se.exception.code)
-
