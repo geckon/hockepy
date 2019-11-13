@@ -25,7 +25,8 @@ from hockepy import nhl
 from hockepy.config import CONF
 from hockepy.commands import BaseCommand
 from hockepy.game import has_started, GameStatus
-from hockepy.utils import bold_text, exit_error, local_timezone
+from hockepy.utils import (bold_text, bold_escape_seq_width, exit_error,
+                           local_timezone)
 
 
 class Schedule(BaseCommand):
@@ -58,6 +59,39 @@ class Schedule(BaseCommand):
                             help='print times in UTC instead of local time')
         return parser
 
+    @staticmethod
+    def get_time_txt(game, timezone=None):
+        """Compose game's time as a text to be printed."""
+        if timezone:
+            gametime = game.time.astimezone(timezone)
+        else:
+            gametime = game.time
+
+        return f'{gametime.hour:02d}:{gametime.minute:02d} {gametime.tzname()}'
+
+    @staticmethod
+    def get_score_txt(game, score_fmt):
+        """"Compose game's score as a text to be printed."""
+        if has_started(game):
+            score = score_fmt.format(away=game.away_score,
+                                     home=game.home_score)
+            if game.last_play.period == 'SO' or game.last_play.period == 'OT':
+                return score + ' ' + game.last_play.period
+            return score + '   '
+
+        # the game has not started yet -> don't display score
+        return '      '
+
+    @staticmethod
+    def get_last_play_txt(game):
+        """Compose game's last play as a text to be printed."""
+        if game.status == GameStatus.LIVE and game.last_play:
+            return f'- {game.last_play.description} ({game.last_play.time})'
+
+        # the game has finished or has not started yet
+        # -> the last play is not relevant
+        return ''
+
     def print_game(self, game, team_width, timezone=None):
         """Print the given game.
 
@@ -76,13 +110,13 @@ class Schedule(BaseCommand):
         away_width = team_width
 
         # highight teams
-        ESCAPE_SEQ_WIDTH = 8  # width compensation for bold escape seq.
+        width_compensation = bold_escape_seq_width()
         if game.home in CONF['highlight_teams']:
             game = game._replace(home=bold_text(game.home))
-            home_width = home_width + ESCAPE_SEQ_WIDTH
+            home_width = home_width + width_compensation
         if game.away in CONF['highlight_teams']:
             game = game._replace(away=bold_text(game.away))
-            away_width = away_width + ESCAPE_SEQ_WIDTH
+            away_width = away_width + width_compensation
 
         if self.args.home_first:
             teams_fmt = '{home:>{home_w}} : {away:<{away_w}}'
@@ -93,30 +127,30 @@ class Schedule(BaseCommand):
         teams = teams_fmt.format(away=game.away, home=game.home,
                                  away_w=away_width, home_w=home_width)
 
-        if timezone:
-            gametime = game.time.astimezone(timezone)
-        else:
-            gametime = game.time
-        time = f'{gametime.hour:02d}:{gametime.minute:02d} {gametime.tzname()}'
-
-        last_play = game.last_play
-        if has_started(game):
-            score = score_fmt.format(away=game.away_score,
-                                     home=game.home_score)
-            if last_play.period == 'SO' or last_play.period == 'OT':
-                score = score + ' ' + last_play.period
-            else:
-                score = score + '   '
-        else:
-            score = '      '
-
-        last_play_txt = ''
-        if game.status == GameStatus.LIVE and last_play:
-            last_play_txt = f'- {last_play.description} ({last_play.time})'
-
+        time = Schedule.get_time_txt(game, timezone)
+        score = Schedule.get_score_txt(game, score_fmt)
+        last_play = Schedule.get_last_play_txt(game)
         status = f'({game.status})'
 
-        print(' '.join((gametype, teams, time, score, status, last_play_txt)))
+        print(' '.join((gametype, teams, time, score, status, last_play)))
+
+    def print_schedule(self, schedule, local_tz):
+        """Print the schedule."""
+        if schedule is None:
+            print('No games at all.')
+            return
+        for date, games in schedule.items():
+            print(f'Schedule for {date}')
+            if not games:
+                print(f'  No games for {date}.')
+            else:
+                home_width = max([len(game.home) for game in games])
+                away_width = max([len(game.away) for game in games])
+                # + 1 is an additional padding
+                team_width = max(home_width, away_width) + 1
+                for game in games:
+                    self.print_game(game, team_width, local_tz)
+            print('')
 
     def run(self):
         """Run the command."""
@@ -144,18 +178,4 @@ class Schedule(BaseCommand):
 
         # Get the schedule and print it.
         schedule = nhl.get_schedule(self.args.first_date, self.args.last_date)
-        if schedule is None:
-            print('No games at all.')
-            return
-        for date, games in schedule.items():
-            print(f'Schedule for {date}')
-            if not games:
-                print(f'  No games for {date}.')
-            else:
-                home_width = max([len(game.home) for game in games])
-                away_width = max([len(game.away) for game in games])
-                # + 1 is an additional padding
-                team_width = max(home_width, away_width) + 1
-                for game in games:
-                    self.print_game(game, team_width, local_tz)
-            print('')
+        self.print_schedule(schedule, local_tz)

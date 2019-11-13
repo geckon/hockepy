@@ -37,6 +37,11 @@ def bold_text(text):
     return ESCAPE_SEQ.BOLD + text + ESCAPE_SEQ.END
 
 
+def bold_escape_seq_width():
+    """Width of the escape sequences for bold text."""
+    return 8
+
+
 def datetime_to_local(dto):
     """Convert the given datetime object to the local time zone."""
     return dto.astimezone(local_timezone())
