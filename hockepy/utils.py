@@ -27,19 +27,20 @@ import time
 import sys
 
 
-class ESCAPE_SEQ:
-    BOLD = '\033[1m'
-    END = '\033[0m'
-
-
-def bold_text(text):
-    """Wrap a string with escape sequences for bold."""
-    return ESCAPE_SEQ.BOLD + text + ESCAPE_SEQ.END
+ESCAPE_SEQ = {
+    'bold': '\033[1m',
+    'end': '\033[0m'
+}
 
 
 def bold_escape_seq_width():
     """Width of the escape sequences for bold text."""
-    return 8
+    return len(ESCAPE_SEQ['bold']) + len(ESCAPE_SEQ['end'])
+
+
+def bold_text(text):
+    """Wrap a string with escape sequences for bold."""
+    return f"{ESCAPE_SEQ['bold']}{text}{ESCAPE_SEQ['end']}"
 
 
 def datetime_to_local(dto):
@@ -47,13 +48,14 @@ def datetime_to_local(dto):
     return dto.astimezone(local_timezone())
 
 
-def exit_error(msg):
-    """Exit with an error message.
+def exit_error(msg=None):
+    """Exit with an error message (if provided).
 
     This should be called in case of a failure that is supposed to
     lead to the program's exit.
     """
-    logging.error(msg)
+    if msg:
+        logging.error(msg)
     logging.info('Exiting...')
     sys.exit(1)
 
