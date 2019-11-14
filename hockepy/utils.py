@@ -62,16 +62,9 @@ def exit_error(msg=None):
 
 def local_timezone():
     """Return local time zone as a datetime.timezone object."""
-    if time.daylight:
-        offset = time.altzone
-        tz_name = time.tzname[1]
-    else:
-        offset = time.timezone
-        tz_name = time.tzname[0]
-
-    # for some reason time.timezone/altzone return a reverse offset
-    offset = -1 * offset
-
-    local_tz = datetime.timezone(datetime.timedelta(seconds=offset), tz_name)
+    local_time = time.localtime()
+    local_tz = datetime.timezone(
+        datetime.timedelta(seconds=local_time.tm_gmtoff), local_time.tm_zone
+    )
     logging.debug('Local timezone is determined to be %s.', local_tz)
     return local_tz
