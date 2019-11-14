@@ -13,6 +13,7 @@ hockepy.utils module tests
 ------------------------
 """
 
+import time
 import unittest
 
 from hockepy import utils
@@ -29,9 +30,13 @@ class TestUtils(unittest.TestCase):
                          utils.bold_text('Hello world!'))
         self.assertEqual(8, utils.bold_escape_seq_width())
 
-    def test02_exit(self):
+    def test02_exit_error(self):
         """Test that exit_error() actually exits with exit code 1."""
         with self.assertRaises(SystemExit) as se:
             utils.exit_error()
             unittest.main(exit=False)
         self.assertEqual(1, se.exception.code)
+
+    def test03_local_timezone(self):
+        """Test that local timezone is determined correctly."""
+        self.assertEqual(time.localtime().tm_zone, str(utils.local_timezone()))
