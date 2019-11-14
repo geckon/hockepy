@@ -106,8 +106,7 @@ class Schedule(BaseCommand):
 
         gametype = f'{game.type:2}'
 
-        home_width = team_width
-        away_width = team_width
+        home_width = away_width = team_width
 
         # highight teams
         width_compensation = bold_escape_seq_width()
