@@ -25,6 +25,7 @@ import sys
 from hockepy.commands import get_commands
 from hockepy.config import init_config
 from hockepy.log import init_log
+from hockepy.utils import exit_error
 
 
 def process_args(parser):
@@ -34,10 +35,8 @@ def process_args(parser):
     provided).
     """
     args = parser.parse_args(sys.argv[1:])
-    if args.command_name is None:
-        print(f"Command missing. Run `{sys.argv[0]} -h' for help.")
-        sys.exit(1)
 
+    # initialize log
     if args.debug:
         loglevel = logging.DEBUG
     elif args.verbose:
@@ -46,6 +45,10 @@ def process_args(parser):
         loglevel = logging.WARNING
     init_log(level=loglevel)
     logging.debug('Logging level set to %s', loglevel)
+
+    # check that we have a command
+    if args.command_name is None:
+        exit_error(f"Command missing. Run `{sys.argv[0]} -h' for help.")
 
     return args
 
