@@ -77,8 +77,6 @@ def init_config():
     """
     conf_file = read_config_file()
 
-    global CONF
-
     # initialize default values here
     # (if not specified by the config file):
     CONF['highlight_teams'] = conf_file.get('highlight_teams', [])
