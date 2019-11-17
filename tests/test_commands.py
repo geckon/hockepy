@@ -13,7 +13,6 @@ hockepy.commands module tests
 ------------------------
 """
 
-import time
 import unittest
 
 from hockepy import commands
@@ -26,17 +25,49 @@ class TestCommands(unittest.TestCase):
     def test01_command_registration(self):
         """Test that commands are properly registered."""
 
+        # pylint: disable=W0612
+        # (ignore unused-variable DummyCommand)
         class DummyCommand(commands.BaseCommand):
+            """Dummy command.
+            """
+
             _COMMAND = 'dummy_command'
 
-        self.assertIn(DummyCommand._COMMAND,
+            @property
+            def description(self):
+                pass
+
+            @classmethod
+            def register_parser(cls, subparsers):
+                pass
+
+            def run(self):
+                pass
+
+        self.assertIn('dummy_command',
                       commands.BaseCommand.get_commands())
 
     def test02_abstract_command_registration(self):
         """Test that abstract commands are not registered."""
 
+        # pylint: disable=W0612
+        # (ignore unused-variable AbstractDummyCommand)
         class AbstractDummyCommand(commands.BaseCommand, is_abstract=True):
+            """Dummy abstract command.
+            """
+
             _COMMAND = 'abstract_dummy_command'
 
-        self.assertNotIn(AbstractDummyCommand._COMMAND,
+            @property
+            def description(self):
+                pass
+
+            @classmethod
+            def register_parser(cls, subparsers):
+                pass
+
+            def run(self):
+                pass
+
+        self.assertNotIn('abstract_dummy_command',
                          commands.BaseCommand.get_commands())
