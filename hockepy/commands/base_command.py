@@ -52,12 +52,32 @@ class BaseCommand(metaclass=BaseCommandMeta):
     should implement.
     """
 
+    # dictionary: command name -> command class
+    _cmds_registry = {}
+
     # This needs to be overwritten by every subclass.
     _COMMAND = None
 
     def __init__(self, args=None):
         """Initialize the command."""
         self.args = args
+
+    @classmethod
+    def __init_subclass__(cls, is_abstract=False, **kwargs):
+        """Register each non-abstract subclass as a command."""
+        super().__init_subclass__(**kwargs)
+        if not is_abstract:
+            cmd_name = cls._COMMAND
+            if cmd_name in cls._cmds_registry:
+                raise ValueError(
+                    f'Attempting to register {cmd_name!r} command twice.'
+                )
+            cls._cmds_registry[cmd_name] = cls
+
+    @classmethod
+    def get_commands(cls):
+        """Return all registered commands."""
+        return cls._cmds_registry
 
     @property
     def command(self):
