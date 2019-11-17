@@ -60,7 +60,7 @@ def run_hockepy():
     subparsers = parser.add_subparsers(dest='command_name')
 
     cmds = get_commands()
-    for _, cmd_instance in cmds.items():
+    for cmd_instance in cmds.values():
         cmd_instance.register_parser(subparsers)
 
     args = process_args(parser)
