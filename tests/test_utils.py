@@ -32,10 +32,10 @@ class TestUtils(unittest.TestCase):
 
     def test02_exit_error(self):
         """Test that exit_error() actually exits with exit code 1."""
-        with self.assertRaises(SystemExit) as se:
+        with self.assertRaises(SystemExit) as sysexit:
             utils.exit_error()
             unittest.main(exit=False)
-        self.assertEqual(1, se.exception.code)
+        self.assertEqual(1, sysexit.exception.code)
 
     def test03_local_timezone(self):
         """Test that local timezone is determined correctly."""
