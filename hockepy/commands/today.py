@@ -27,6 +27,9 @@ class Today(BaseCommand):
     """Today command.
 
     Accepts the following arguments:
+    - flag indicating that home team should be listed first
+      (--home_first)
+    - flag indicating that game times should be printed in UTC (--utc)
     """
 
     _COMMAND = 'today'

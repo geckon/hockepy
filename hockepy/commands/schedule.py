@@ -33,7 +33,11 @@ class Schedule(BaseCommand):
     """Schedule command.
 
     Accepts the following arguments:
-    - date (positional)
+    - start date (positional)
+    - end date (positional)
+    - flag indicating that home team should be listed first
+      (--home_first)
+    - flag indicating that game times should be printed in UTC (--utc)
     """
 
     _COMMAND = 'schedule'
