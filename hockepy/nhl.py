@@ -38,6 +38,7 @@ API_URL = 'https://statsapi.web.nhl.com/api/v1/'
 # API points
 FEED_URL = urljoin(API_URL, 'game/')
 SCHEDULE_URL = urljoin(API_URL, 'schedule')
+STANDINGS_URL = urljoin(API_URL, 'standings')
 
 # Date/time used by the API
 DATETIME_FMT = '%Y-%m-%dT%H:%M:%SZ'
@@ -222,3 +223,13 @@ def get_last_play(game_id, fail=True):
         if fail:
             raise err
         return None
+
+def get_standings():
+    """Return the current standings."""
+    logging.info('Retrieving NHL standings.')
+    response = requests.get(STANDINGS_URL)
+    if response.status_code != requests.codes['ok']:
+        log_bad_response_msg(response)
+        response.raise_for_status()
+
+    return response.json()

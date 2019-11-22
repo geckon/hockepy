@@ -20,8 +20,10 @@ standings as a table.
 
 import logging
 
+from hockepy import nhl
 from hockepy.commands import BaseCommand
 
+from prettytable import PrettyTable
 
 class Standings(BaseCommand):
     """Standings command.
@@ -44,3 +46,4 @@ class Standings(BaseCommand):
     def run(self):
         """Run the command with the given arguments."""
         logging.debug('Running the %r command.', self.command)
+        standings = nhl.get_standings()
