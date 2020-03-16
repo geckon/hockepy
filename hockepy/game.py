@@ -57,6 +57,7 @@ def has_started(game):
 @unique
 class GameStatus(Enum):
     """Game status enum."""
+    POSTPONED = 0
     SCHEDULED = 1
     LIVE = 2
     FINAL = 3

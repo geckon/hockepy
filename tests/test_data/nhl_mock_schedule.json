@@ -1,5 +1,5 @@
 {
-  "copyright": "(c) 2017 - 2018 by Tomáš Heger",
+  "copyright": "(c) 2017 - 2020 by Tomáš Heger",
   "totalItems": 7,
   "totalEvents": 0,
   "totalGames": 7,
@@ -232,9 +232,9 @@
     },
     {
       "date": "2017-07-08",
-      "totalItems": 4,
+      "totalItems": 5,
       "totalEvents": 0,
-      "totalGames": 4,
+      "totalGames": 5,
       "totalMatches": 0,
       "games": [
         {
@@ -439,6 +439,57 @@
           },
           "content": {
             "link": "/api/v1/game/201707080004/content"
+          }
+        },
+        {
+          "gamePk": 201707080009,
+          "link": "/api/v1/game/201707080009/feed/live",
+          "gameType": "P",
+          "season": "20172018",
+          "gameDate": "2017-07-09T01:00:00Z",
+          "status" : {
+            "abstractGameState" : "Preview",
+            "codedGameState" : "9",
+            "detailedState" : "Postponed",
+            "statusCode" : "9",
+            "startTimeTBD" : false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 1,
+                "name": "Winterfell Starks",
+                "link": "/api/v1/teams/15"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 0,
+                "losses": 0,
+                "ot": 0,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 8,
+                "name": "Twins Freys",
+                "link": "/api/v1/teams/18"
+              }
+            }
+          },
+          "venue": {
+            "name": "Red Wedding Arena",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/201707080009/content"
           }
         }
       ],
