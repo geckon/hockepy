@@ -120,10 +120,27 @@ def parse_schedule(schedule):
 def get_status(status_code):
     """Return GameStatus for the given NHL API's statusCode."""
     if status_code in ('1', '2', '8'):
+        # 1 == scheduled
+        # 2 == pre-game
+        # 8 == scheduled (time TBD)
         return GameStatus.SCHEDULED
     if status_code in ('3', '4'):
+        # 3 == in progress
+        # 4 == in progress - critical
         return GameStatus.LIVE
-    return GameStatus.FINAL
+    if status_code == '9':
+        # 9 == postponed
+        return GameStatus.POSTPONED
+    if status_code in ('5', '6', '7'):
+        # 5 == game over
+        # 6 == final
+        # 7 == final
+        # (not sure what the difference between 6 and 7 is but 5 is set
+        # just after a game ends, 6 soon after that and 7 a few minutes
+        # later)
+        return GameStatus.FINAL
+
+    raise ValueError(f'Unexpected game status: {status_code!r}.')
 
 
 def get_type(game_type):
