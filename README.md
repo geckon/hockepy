@@ -16,6 +16,12 @@ _(pronounced like hockey-py so probably something like_ /ˈhɑː.kipaɪ/_)_
 **Important:** Please keep in mind that `hockepy` is under active development
 and any part can be changed anytime.
 
+## Installation
+
+```
+pip install hockepy
+```
+
 ## CLI utility
 
 The main purpose of `hockepy` is to provide a command line utility for geeky
@@ -50,6 +56,21 @@ Subcommands also support `-h` option:
 
 Bear in mind that the actual help may differ as this listing won't necessarily
 be updated with any feature addition/change.
+
+### Configuration
+
+You can highlight your favorite team using a configuration file called
+`.hockepy.conf` (an example is included in the repository):
+
+```
+highlight_teams = [
+    "Boston Bruins",
+    "Pittsburgh Penguins",
+]
+```
+
+The file can be placed in the current working directory, your home directory or
+in a directory specified by HOCKEPY_CONF_DIR (hockepy checks in that order).
 
 ## NHL API
 
