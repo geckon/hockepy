@@ -28,7 +28,7 @@ The main purpose of `hockepy` is to provide a command line utility for geeky
 hockey fans. The easiest way to discover the features currently implemented is
 to display help:
 
-      $ ./hocke.py -h
+      $ hockepy -h
     usage: hocke.py [-h] [-D] [-v] {today,schedule} ...
 
     positional arguments:
@@ -41,7 +41,7 @@ to display help:
 
 Subcommands also support `-h` option:
 
-    $ ./hocke.py schedule -h
+    $ hockepy schedule -h
     usage: hocke.py schedule [-h] [--home-first] [--utc]
                                [first_date] [last_date]
 
