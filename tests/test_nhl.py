@@ -199,7 +199,7 @@ class TestNhl(unittest.TestCase):
                  away='Springfield Electrons',
                  home_score=0,
                  away_score=0,
-                 time='TBD',
+                 time=None,
                  type=GameType.PLAYOFFS,
                  status=GameStatus.SCHEDULED,
                  last_play=None),

@@ -62,6 +62,9 @@ class Schedule(BaseCommand):
     @staticmethod
     def get_time_txt(game, timezone=None):
         """Compose game's time as a text to be printed."""
+        if not game.time:
+            return 'Time TBD'
+
         if timezone:
             gametime = game.time.astimezone(timezone)
         else:
