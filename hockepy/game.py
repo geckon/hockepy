@@ -32,7 +32,7 @@ Game = namedtuple(
      'away',        # away team's name
      'home_score',  # home team's score
      'away_score',  # away team's score
-     'time',        # UTC time and date (datetime object)
+     'time',        # UTC time and date (datetime object) or None
      'type',        # GameType instance
      'status',      # GameStatus instance
      'last_play']   # last play so far - Play namedtuple or None

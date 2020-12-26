@@ -86,7 +86,7 @@ def parse_schedule(schedule):
             status_code = game['status']['statusCode']
             if status_code == '8':
                 # scheduled but time TBD
-                gametime = 'TBD'
+                gametime = None
             else:
                 try:
                     gametime = datetime.strptime(game['gameDate'],
