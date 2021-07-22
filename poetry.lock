@@ -1,6 +1,6 @@
 [[package]]
 name = "astroid"
-version = "2.6.4"
+version = "2.6.5"
 description = "An abstract syntax tree for Python with inference support."
 category = "dev"
 optional = false
@@ -147,14 +147,14 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "pylint"
-version = "2.9.4"
+version = "2.9.5"
 description = "python code static checker"
 category = "dev"
 optional = false
 python-versions = "~=3.6"
 
 [package.dependencies]
-astroid = ">=2.6.4,<2.7"
+astroid = ">=2.6.5,<2.7"
 colorama = {version = "*", markers = "sys_platform == \"win32\""}
 isort = ">=4.2.5,<6"
 mccabe = ">=0.6,<0.7"
@@ -274,12 +274,12 @@ testing = ["jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "7cacf7106c71f7fe80e62578d23ba25cded1e263dba5d1f67f026056866bc64b"
+content-hash = "727468cb9b77fbe6a5f0c7320711e69fcc3daf2f0827f4922adee6a4f614e2a7"
 
 [metadata.files]
 astroid = [
-    {file = "astroid-2.6.4-py3-none-any.whl", hash = "sha256:6021561b2e87ed6b3c93c2682ac50079c65ab08f1e4e0277ba38f97e0e492185"},
-    {file = "astroid-2.6.4.tar.gz", hash = "sha256:a670dd7af3fe603f51aa7117462588b7c3bdcd58007edfaee752bf82eceecd28"},
+    {file = "astroid-2.6.5-py3-none-any.whl", hash = "sha256:7b963d1c590d490f60d2973e57437115978d3a2529843f160b5003b721e1e925"},
+    {file = "astroid-2.6.5.tar.gz", hash = "sha256:83e494b02d75d07d4e347b27c066fd791c0c74fc96c613d1ea3de0c82c48168f"},
 ]
 bandit = [
     {file = "bandit-1.7.0-py3-none-any.whl", hash = "sha256:216be4d044209fa06cf2a3e51b319769a51be8318140659719aa7a115c35ed07"},
@@ -353,8 +353,8 @@ pycodestyle = [
     {file = "pycodestyle-2.7.0.tar.gz", hash = "sha256:c389c1d06bf7904078ca03399a4816f974a1d590090fecea0c63ec26ebaf1cef"},
 ]
 pylint = [
-    {file = "pylint-2.9.4-py3-none-any.whl", hash = "sha256:2a971129fb2d594068913a7e531d4b6d2785b2a68c6857e2baa40d3214da30f4"},
-    {file = "pylint-2.9.4.tar.gz", hash = "sha256:a622c4c4c79dc8fe5e784efccacec3afe9d5e5ffab5fda2264fb5afa7c9b5797"},
+    {file = "pylint-2.9.5-py3-none-any.whl", hash = "sha256:748f81e5776d6273a6619506e08f1b48ff9bcb8198366a56821cf11aac14fc87"},
+    {file = "pylint-2.9.5.tar.gz", hash = "sha256:1f333dc72ef7f5ea166b3230936ebcfb1f3b722e76c980cb9fe6b9f95e8d3172"},
 ]
 pyyaml = [
     {file = "PyYAML-5.3.1-cp27-cp27m-win32.whl", hash = "sha256:74809a57b329d6cc0fdccee6318f44b9b8649961fa73144a98735b0aaf029f1f"},
