@@ -17,7 +17,7 @@ requests = "^2.24.0"
 toml = "^0.10.1"
 
 [tool.poetry.dev-dependencies]
-bandit = "^1.7.0"
+bandit = "^1.7.1"
 pycodestyle = "^2.8.0"
 pylint = "^2.11.1"
 
