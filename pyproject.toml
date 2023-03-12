@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hockepy"
-version = "0.1.1"
+version = "0.2"
 description = "CLI utility and (a subset of) NHL API for hockey nerds"
 homepage = "https://github.com/geckon/hockepy"
 authors = ["Tomáš Heger"]
