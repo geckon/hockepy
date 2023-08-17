@@ -7,7 +7,7 @@
 #
 
 init:
-	pip install -r requirements.txt
+	poetry install
 
 bandit:
 	bandit -r hocke.py hockepy tests
