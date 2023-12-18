@@ -33,7 +33,7 @@ import requests
 from hockepy.game import Game, GameStatus, GameType, Play
 
 # URL to the NHL API
-API_URL = 'https://statsapi.web.nhl.com/api/v1/'
+API_URL = 'https://api-web.nhle.com/v1/'
 
 # API points
 FEED_URL = urljoin(API_URL, 'game/')
