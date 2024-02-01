@@ -13,9 +13,6 @@ _(pronounced like hockey-py so probably something like_ /ˈhɑː.kipaɪ/_)_
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/geckon/hockepy.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/geckon/hockepy/context:python)
 [![Updates](https://pyup.io/repos/github/geckon/hockepy/shield.svg)](https://pyup.io/repos/github/geckon/hockepy/)
 
-**Important:** Please keep in mind that `hockepy` is under active development
-and any part can be changed anytime.
-
 ## Installation
 
 ```
