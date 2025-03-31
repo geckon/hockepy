@@ -18,7 +18,7 @@ toml = "^0.10.1"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.8.3"
-pycodestyle = "^2.12.1"
+pycodestyle = "^2.13.0"
 pylint = "^3.3.6"
 
 [tool.poetry.scripts]
