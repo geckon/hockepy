@@ -19,7 +19,7 @@ toml = "^0.10.1"
 [tool.poetry.dev-dependencies]
 bandit = "^1.9.4"
 pycodestyle = "^2.14.0"
-pylint = "^4.0.7"
+pylint = "^4.0.8"
 
 [tool.poetry.scripts]
 hockepy = 'hocke:run_hockepy'
